@@ -3,7 +3,9 @@ import Main from '../components/Main/Main';
 
 const mapStateToProps = state => ({});
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+
+});
 
 export default connect(
   mapStateToProps,

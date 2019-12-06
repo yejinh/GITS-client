@@ -13,7 +13,7 @@ export default function Login({ isLoggedIn, authenticate }) {
     if (isLoggedIn) {
       history.replace(from);
     }
-  }, [ isLoggedIn ]);
+  }, [ from, history, isLoggedIn ]);
 
   const _login = method => async() => {
     try {

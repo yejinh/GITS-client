@@ -5,6 +5,11 @@ export const login = token => ({
   token
 });
 
+export const isLoading = data => ({
+  type: actionTypes.IS_LOADING,
+  data
+});
+
 export const fetchUserData = userData => ({
   type: actionTypes.FETCH_USER_DATA,
   userData

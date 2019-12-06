@@ -1,12 +1,15 @@
 import {
   LOGIN,
+  IS_LOADING,
   FETCH_USER_DATA
 } from '../constants/actionType';
+import { camelCaseConvertor } from '../utils';
 
 const token = localStorage.getItem('ACCESS_TOKEN');
 const initialState = {
+  isLoggedIn: token ? true : false,
+  isLoading: true,
   user: {},
-  isLoggedIn: token ? true : false
 };
 
 const userReducer = (state = initialState, action) => {
@@ -19,10 +22,16 @@ const userReducer = (state = initialState, action) => {
         isLoggedIn: true
       };
 
+    case IS_LOADING:
+      return {
+        ...state,
+        isLoading: action.data
+      };
+
     case FETCH_USER_DATA:
       return {
         ...state,
-        user: action.userData,
+        user: camelCaseConvertor(action.userData),
         isLoggedIn: true
       };
 

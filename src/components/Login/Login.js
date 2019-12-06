@@ -28,13 +28,18 @@ export default function Login({ isLoggedIn, authenticate }) {
       <video className="login-video" loop autoPlay>
         <source src={BACKGROUNDVIDEO} type="video/mp4"/>
       </video>
+      <div className="login-background" />
       <div className="login-box">
-        <button onClick={_login('google')}>
-          google
-        </button>
-        <button onClick={_login('facebook')}>
-          facebook
-        </button>
+        <div className="login-logo">Genie in the sky</div>
+        <div className="login-title">Create your own magical story and bring it to life with your voice.</div>
+        <div className="login-buttons">
+          <button className="login-with-facebook" onClick={_login('facebook')}>
+            Connect with Facebook
+          </button>
+          <button className="login-with-google" onClick={_login('google')}>
+            Connect with Google
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Header from '../Header/Header';
 import './Main.scss';
 
 export default function Main(props) {
@@ -19,10 +20,13 @@ export default function Main(props) {
   if (isLoading) return <div>...is loading</div>
 
   return (
-    <div className="main-wrapper">
-      <div>{email}</div>
-      <div>{name}</div>
-      <img src={profilePhoto} alt="profile" />
-    </div>
+    <>
+      <Header />
+      <div className="main-wrapper">
+        <div>{email}</div>
+        <div>{name}</div>
+        <img src={profilePhoto} alt="profile" />
+      </div>
+    </>
   );
 }

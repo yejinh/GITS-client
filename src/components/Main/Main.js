@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-export default function Main(props) {
+export default function Main({ fatchUserData }) {
+  useEffect(() => {
+    fatchUserData();
+  }, []);
 
   return (
     <div>HELLO</div>

@@ -1,11 +1,10 @@
 import React from 'react';
-import './Nav.scss';
+import { NavWrapper } from './Nav.styled';
 
-export default function Nav({ onButtonClick }) {
+export default function Nav({ isOpen, onButtonClick }) {
   return (
-    <div className="nav-wrapper">
-      <span>NAV</span>
-      <span className="nav-close" onClick={onButtonClick}>X</span>
-    </div>
+    <NavWrapper isOpen={isOpen}>
+      <button className="nav-close" onClick={onButtonClick}>X</button>
+    </NavWrapper>
   );
 }

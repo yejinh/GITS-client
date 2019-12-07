@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../Header/Header';
 import Nav from '../Nav/Nav';
-import './Main.scss';
+import { MainWrapper } from './Main.styled';
 
 export default function Main(props) {
   const [ isNavOpened, setIsNaveOpened ] = useState(false);
@@ -29,12 +29,12 @@ export default function Main(props) {
   return (
     <>
       <Header onButtonClick={_handleNav} />
-      {isNavOpened && <Nav onButtonClick={_handleNav} />}
-      <div className="main-wrapper">
+      <Nav isOpen={isNavOpened} onButtonClick={_handleNav} />
+      <MainWrapper>
         <div>{email}</div>
         <div>{name}</div>
         <img src={profilePhoto} alt="profile" />
-      </div>
+      </MainWrapper>
     </>
   );
 }

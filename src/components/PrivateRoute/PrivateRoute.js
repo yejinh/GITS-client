@@ -1,14 +1,51 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
 import { Route, Redirect }from 'react-router-dom';
+import { isLoading, fetchUserData } from '../../actions';
 
-export default function PrivateRoute({ component: Component }) {
-  const token = localStorage.getItem('ACCESS_TOKEN');
+export default function PrivateRoute(Component) {
+  function AuthRoute({ fatchUserData }) {
+    const token = localStorage.getItem('ACCESS_TOKEN');
 
-  return (
-    <Route
-      render={() => token
-        ? <Component />
-        : <Redirect to="/login" />}
-    />
-  );
+    useEffect(() => {
+      fatchUserData(token);
+    }, [ fatchUserData, token ]);
+
+    return (
+      <Route
+        render={() => token
+          ? <Component />
+          : <Redirect to="/login" />}
+      />
+    );
+  }
+
+  const dispatchFetchUserData = dispatch => async() => {
+    try {
+      dispatch(isLoading(true));
+
+      const token = localStorage.getItem('ACCESS_TOKEN');
+      const res = await axios.get(`${process.env.REACT_APP_HOST_URL}/api/users`, {
+        headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }});
+
+      dispatch(fetchUserData(res.data.user));
+      console.log(res.data.user);
+      dispatch(isLoading(false));
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  const mapDispatchToProps = dispatch => ({
+    fatchUserData: dispatchFetchUserData(dispatch)
+  });
+
+  return connect(
+    null,
+    mapDispatchToProps
+  )(AuthRoute);
 }

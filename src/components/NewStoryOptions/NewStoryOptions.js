@@ -16,14 +16,14 @@ export default function NewStoryOptions({ location }) {
   return (
     <>
       <Header />
-      <Burger isOpen={isNavOpened} setOpen={_handleNav} />
+      <Burger isOpen={isNavOpened} onButtonClick={_handleNav} />
       <Nav isOpen={isNavOpened} user={user}/>
       <StyledNewStoryOptions>
         <section>
-          <Link to="/new-story">Draw your own</Link>
+          <Link to={"/new-story"}>Draw your own</Link>
         </section>
         <section>
-          <Link to="/new-story">Upload images</Link>
+          <Link to={"/new-story"}>Upload images</Link>
         </section>
       </StyledNewStoryOptions>
     </>

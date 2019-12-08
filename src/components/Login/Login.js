@@ -15,12 +15,8 @@ export default function Login({ isLoggedIn, authenticate }) {
     }
   }, [ from, history, isLoggedIn ]);
 
-  const _login = method => async() => {
-    try {
-      await authenticate(method);
-    } catch(err) {
-      console.log(err);
-    }
+  const _login = method => () => {
+    authenticate(method);
   };
 
   return (

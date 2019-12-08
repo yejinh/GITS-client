@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyledBurger } from './Burger.styled';
 
-export default function Burger({ isOpen, setOpen }) {
+export default function Burger({ isOpen, onButtonClick }) {
   return (
-    <StyledBurger open={isOpen} onClick={setOpen}>
+    <StyledBurger open={isOpen} onClick={onButtonClick}>
       <div />
       <div />
       <div />

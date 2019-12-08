@@ -5,7 +5,7 @@ export const StyledBurger = styled.button`
   position: absolute;
   display: flex;
   top: 25px;
-  left: 25px;
+  left: 40px;
   width: 25px;
   height: 25px;
   padding: 0;

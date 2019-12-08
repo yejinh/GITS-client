@@ -10,7 +10,7 @@ export const StyledHeader = styled.header`
   align-items: center;
   justify-content: space-between;
   font-family: ${vars.$serif};
-  padding: 0 30px;
+  padding: 0 70px;
 
   section {
     display: flex;

@@ -16,7 +16,7 @@ export default function Home(props) {
   return (
     <>
       <Header />
-      <Burger isOpen={isNavOpened} setOpen={_handleNav} />
+      <Burger isOpen={isNavOpened} onButtonClick={_handleNav} />
       <Nav isOpen={isNavOpened} user={user} />
       <StyledHome>
         <div>Main</div>

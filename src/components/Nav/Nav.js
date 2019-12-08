@@ -1,10 +1,14 @@
 import React from 'react';
-import { NavWrapper } from './Nav.styled';
+import { StyledNav } from './Nav.styled';
 
-export default function Nav({ isOpen, onButtonClick }) {
+export default function Nav({ isOpen, user }) {
   return (
-    <NavWrapper isOpen={isOpen}>
-      <button className="nav-close" onClick={onButtonClick}>X</button>
-    </NavWrapper>
+    <StyledNav isOpen={isOpen}>
+      <section>
+        <div style={{ backgroundImage: `url(${user.profilePhoto})` }}/>
+        <div>{user.name}</div>
+        <div>{user.email}</div>
+      </section>
+    </StyledNav>
   );
 }

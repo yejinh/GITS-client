@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import axios from 'axios';
-import Main from '../components/Main/Main';
+import Home from '../components/Home/Home';
 import { isLoading, fetchUserData } from '../actions';
 
 const dispatchFetchUserData = dispatch => async() => {
@@ -33,4 +33,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Main);
+)(Home);

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import * as vars from '../variables';
 
-export const LoginWrapper = styled.div`
+export const StyledLogin = styled.div`
   position: relative;
   width: 100%;
   height: 100vh;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import * as vars from '../variables';
 
-export const NavWrapper = styled.div`
+export const StyledNav = styled.div`
   border: 1px solid ${vars.$black};
   position: absolute;
   width: 250px;

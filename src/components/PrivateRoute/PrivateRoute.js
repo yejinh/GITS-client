@@ -14,8 +14,8 @@ export default function PrivateRoute(Component) {
 
     return (
       <Route
-        render={() => token
-          ? <Component />
+        render={props => token
+          ? <Component {...props} />
           : <Redirect to="/login" />}
       />
     );
@@ -33,7 +33,6 @@ export default function PrivateRoute(Component) {
       }});
 
       dispatch(fetchUserData(res.data.user));
-      console.log(res.data.user);
       dispatch(isLoading(false));
     } catch(err) {
       console.log(err);

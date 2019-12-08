@@ -17,9 +17,11 @@ export const StyledHeader = styled.header`
     align-items: center;
   }
 
-  div {
+  a {
     font-size: 20px;
     padding-left: 40px;
+    text-decoration: none;
+    color: ${vars.$black};
   }
 
   span {

@@ -43,3 +43,4 @@ export default function Login({ isLoggedIn, authenticate }) {
       </LoginBox>
     </StyledLogin>
   );
+}

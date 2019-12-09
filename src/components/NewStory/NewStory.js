@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Burger from '../Burger/Burger';
-import InputText from '../InputText/InputText';
+import NewStoryPage from '../NewStoryPage/NewStoryPage';
 import { StyledNewStory } from './NewStory.styled';
 
-export default function NewStory(props) {
+export default function NewStory({ location, history }) {
+  const [ pageA, setPageA ] = useState('');
+  const [ pageB, setPageB ] = useState('');
+
+  const { method } = location.state;
+
   const _handleExit = () => {
-    props.history.goBack();
+    history.goBack();
+  };
+
+  const _setPageA = text => setPageA(text);
+  const _setPageB = text => setPageB(text);
+
+  const _submit = text => {
+    console.log(text);
   };
 
   return (
@@ -16,8 +28,8 @@ export default function NewStory(props) {
         </span>
       </section>
       <section>
-        <div>NEW STORY</div>
-        <InputText />
+        <div><NewStoryPage method={method} text={pageA} setText={_setPageA} /></div>
+        <div><NewStoryPage method={method} text={pageB} setText={_setPageB} /></div>
       </section>
     </StyledNewStory>
   );

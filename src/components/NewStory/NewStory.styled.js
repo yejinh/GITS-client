@@ -11,6 +11,13 @@ export const StyledNewStory = styled.div`
       justify-content: flex-end;
       margin-right: 50px;
     }
+
+    > div {
+      border: 1px solid ${vars.$black};
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
   }
 
   span {

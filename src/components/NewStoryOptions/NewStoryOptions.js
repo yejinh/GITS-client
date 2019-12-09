@@ -20,10 +20,20 @@ export default function NewStoryOptions({ location }) {
       <Nav isOpen={isNavOpened} user={user}/>
       <StyledNewStoryOptions>
         <section>
-          <Link to={"/new-story"}>Draw your own</Link>
+          <Link to={{
+            pathname: "/new-story",
+            state: {
+              method: "draw"
+            }
+          }}>Draw your own</Link>
         </section>
         <section>
-          <Link to={"/new-story"}>Upload images</Link>
+          <Link to={{
+            pathname: "/new-story",
+            state: {
+              method: "upload"
+            }
+          }}>Upload images</Link>
         </section>
       </StyledNewStoryOptions>
     </>

@@ -2,6 +2,7 @@
 export const $white = '#fff';
 export const $black = '#000';
 export const $ivory = '#f8f3e1';
+export const $orange = '#f15d22';
 export const $lightYellow = '#f6e57d';
 export const $babyBlue = '#73c7de';
 export const $prussianBlue = '#234c7b';

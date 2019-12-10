@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
+import { StyledInputText } from './InputText.styled';
 
-export default function InputText({ text, setText }) {
+export default function InputText() {
+  const [ text, setText ] = useState('');
   const _submit = e => {
     e.preventDefault();
     if (!text.length) return alert('You must submit a story.');
-    console.log(text);
     setText('');
   };
 
   return (
     <form onSubmit={_submit}>
-      <textarea
+      <StyledInputText
         onChange={e => setText(e.target.value)}
         value={text}
       />
-      <input type="submit" value="submit" />
     </form>
   );
 }

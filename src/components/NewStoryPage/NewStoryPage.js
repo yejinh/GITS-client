@@ -1,23 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import InputText from '../InputText/InputText';
-import { StyledNewStoryPage, Input } from './NewStoryPage.styled';
+import { StyledNewStoryPage } from './NewStoryPage.styled';
+import Icon from '../Icon.Styled';
+import UPLOAD_ICON from '../NewStoryOptions/src/upload.png';
 
-export default function NewStoryPage({ method, text, setText }) {
-  const [ file, setFile ] = useState(null);
-
-  const _uploadFile = targetFile => {
-    setFile(targetFile);
-  };
-
-  console.log(file);
+export default function NewStoryPage(props) {
+  const {
+    method,
+    text,
+    content,
+    setText,
+    test
+  } = props;
 
   return (
     <StyledNewStoryPage>
-      <div>PAGE</div>
-      <input type="file" id="file" onChange={e => _uploadFile(e.target.files[0])} />
-      <label htmlFor="file">Select a file</label>
-      {/* <button class="upload" type="button">Upload File</button> */}
-      {/* <button class="reset" type="reset">Reset</button> */}
+      <div className="content">
+        {content
+          ? <span
+              className="image"
+              style={{ backgroundImage: `url(${URL.createObjectURL(content)}`}}
+            />
+          : <Icon icon={UPLOAD_ICON} size={"100"} />
+        }
+      </div>
       <InputText text={text} setText={setText} />
     </StyledNewStoryPage>
   );

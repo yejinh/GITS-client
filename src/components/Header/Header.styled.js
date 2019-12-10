@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import * as vars from '../variables';
-import SEARCH from './src/search.png';
 
 export const StyledHeader = styled.header`
   position: fixed;
@@ -22,14 +21,5 @@ export const StyledHeader = styled.header`
     padding-left: 40px;
     text-decoration: none;
     color: ${vars.$black};
-  }
-
-  span {
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    background-image: url(${SEARCH});
-    background-size: cover;
-    background-position: center;
   }
 `;

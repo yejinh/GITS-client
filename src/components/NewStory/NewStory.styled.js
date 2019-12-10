@@ -3,13 +3,18 @@ import * as vars from '../variables';
 
 export const StyledNewStory = styled.div`
   overflow: hidden;
+
   section {
-    // border: 1px solid ${vars.$black};
     display: flex;
 
     :first-child {
       justify-content: flex-end;
       margin-right: 50px;
+    }
+
+    > button {
+      display: inline-block;
+      margin: 0 auto;
     }
 
     > div {
@@ -27,4 +32,4 @@ export const StyledNewStory = styled.div`
     width: 50px;
     height: 50px;
   }
-}`;
+`;

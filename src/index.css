@@ -18,3 +18,7 @@ code {
   box-sizing: border-box;
   background-color: #f8f3e1;
 }
+
+a {
+  text-decoration: none;
+}

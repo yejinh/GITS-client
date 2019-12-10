@@ -8,6 +8,8 @@ export default function NewStory({ location, history }) {
   const [ textA, setTextA ] = useState('');
   const [ textB, setTextB ] = useState('');
   const [ contents, setContents ] = useState([]);
+  const [ isSubmittedA, setIsSubmittedA ] = useState(false);
+  const [ isSubmittedB, setIsSubmittedB ] = useState(false);
 
   const { method } = location.state;
 
@@ -18,6 +20,17 @@ export default function NewStory({ location, history }) {
   const _setTextA = text => setTextA(text);
   const _setTextB = text => setTextB(text);
   const _setContents = content => setContents(content);
+  const _setIsSubmittedA = data => setIsSubmittedA(data);
+  const _setIsSubmittedB = data => setIsSubmittedB(data);
+  const _onNextPageClick = () => {
+    if (contents.length < 2) {
+      return alert('You must upload contents on both pages.');
+    }
+    if (isSubmittedA && isSubmittedB) {
+      return console.log('working');
+    }
+    alert('You must submit a story.');
+  };
 
   const _submit = text => {
     console.log(text);
@@ -34,24 +47,30 @@ export default function NewStory({ location, history }) {
         <InputFile setFiles={_setContents} />
       </section>
       <section>
-        <div>
-          <NewStoryPage
-            method={method}
-            text={textA}
-            content={contents[0]}
-            setText={_setTextA}
-            test="a"
-          />
+        <button onClick={_onNextPageClick}> HELLO </button>
+        <div className="pages">
+          <div>
+            <NewStoryPage
+              method={method}
+              text={textA}
+              isSubmitted={isSubmittedA}
+              content={contents[0]}
+              submit={_setTextA}
+              setIsSubmitted={_setIsSubmittedA}
+            />
+          </div>
+          <div>
+            <NewStoryPage
+              method={method}
+              text={textB}
+              isSubmitted={isSubmittedB}
+              content={contents[1]}
+              submit={_setTextB}
+              setIsSubmitted={_setIsSubmittedB}
+            />
+          </div>
         </div>
-        <div>
-          <NewStoryPage
-            method={method}
-            text={textB}
-            content={contents[1]}
-            setText={_setTextB}
-            test="b"
-          />
-        </div>
+        <button onClick={_onNextPageClick}> HELLO </button>
       </section>
     </StyledNewStory>
   );

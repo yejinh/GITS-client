@@ -1,20 +1,38 @@
 import React, { useState } from 'react';
-import { StyledInputText } from './InputText.styled';
+import { StyledForm } from './InputText.styled';
 
-export default function InputText() {
+export default function InputText({ submit, isSubmitted, setIsSubmitted }) {
   const [ text, setText ] = useState('');
+
+  const _onChange = e => {
+    setText(e);
+    setIsSubmitted(false);
+  };
+
   const _submit = e => {
     e.preventDefault();
+
     if (!text.length) return alert('You must submit a story.');
-    setText('');
+
+    submit(text);
+    setIsSubmitted(true);
   };
 
   return (
-    <form onSubmit={_submit}>
-      <StyledInputText
-        onChange={e => setText(e.target.value)}
+    <StyledForm
+      onSubmit={_submit}
+      isSubmitted={isSubmitted}
+    >
+      <textarea
+        onChange={e => _onChange(e.target.value)}
         value={text}
       />
-    </form>
+      <input
+        type="submit"
+        value={isSubmitted
+          ? "Submitted"
+          : "Submit"
+      }/>
+    </StyledForm>
   );
 }

@@ -8,9 +8,10 @@ export default function NewStoryPage(props) {
   const {
     method,
     text,
+    isSubmitted,
     content,
-    setText,
-    test
+    submit,
+    setIsSubmitted
   } = props;
 
   return (
@@ -24,7 +25,12 @@ export default function NewStoryPage(props) {
           : <Icon icon={UPLOAD_ICON} size={"100"} />
         }
       </div>
-      <InputText text={text} setText={setText} />
+      <InputText
+        text={text}
+        submit={submit}
+        isSubmitted={isSubmitted}
+        setIsSubmitted={setIsSubmitted}
+      />
     </StyledNewStoryPage>
   );
 }

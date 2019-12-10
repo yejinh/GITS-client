@@ -17,11 +17,21 @@ export const StyledNewStory = styled.div`
       margin: 0 auto;
     }
 
-    > div {
-      border: 1px solid ${vars.$black};
+    .pages {
       display: flex;
+      width: 80%;
+
+      > div {
+        width: 100%;
+      }
+    }
+
+    :nth-child(2) {
       justify-content: center;
-      width: 100%;
+    }
+
+    :nth-child(3) {
+      border: 1px solid ${vars.$black};
     }
   }
 

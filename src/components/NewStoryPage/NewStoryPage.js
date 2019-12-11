@@ -8,10 +8,12 @@ export default function NewStoryPage(props) {
   const {
     method,
     text,
-    isSubmitted,
     content,
     submit,
-    setIsSubmitted
+    isSubmitted,
+    setIsSubmitted,
+    isNewPage,
+    setIsNewPage
   } = props;
 
   return (
@@ -30,6 +32,8 @@ export default function NewStoryPage(props) {
         submit={submit}
         isSubmitted={isSubmitted}
         setIsSubmitted={setIsSubmitted}
+        isNewPage={isNewPage}
+        setIsNewPage={setIsNewPage}
       />
     </StyledNewStoryPage>
   );

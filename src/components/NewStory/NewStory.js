@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import Burger from '../Burger/Burger';
+import NewStoryThumbnail from '../NewStoryThumbnail/NewStoryThumbnail';
 import InputFile from '../InputFile/InputFile';
 import NewStoryPage from '../NewStoryPage/NewStoryPage';
 import { StyledNewStory } from './NewStory.styled';
 
-export default function NewStory({ location, history }) {
+export default function NewStory(props) {
+  const { location, history, onNextPageClick, newStoryPages } = props;
+
   const [ textA, setTextA ] = useState('');
   const [ textB, setTextB ] = useState('');
   const [ contents, setContents ] = useState([]);
   const [ isSubmittedA, setIsSubmittedA ] = useState(false);
   const [ isSubmittedB, setIsSubmittedB ] = useState(false);
+  const [ nextClicked, setNextClicked ] = useState(false);
 
   const { method } = location.state;
 
@@ -22,14 +26,23 @@ export default function NewStory({ location, history }) {
   const _setContents = content => setContents(content);
   const _setIsSubmittedA = data => setIsSubmittedA(data);
   const _setIsSubmittedB = data => setIsSubmittedB(data);
+  const _setNextClicked = () => setNextClicked(false);
   const _onNextPageClick = () => {
     if (contents.length < 2) {
       return alert('You must upload contents on both pages.');
     }
-    if (isSubmittedA && isSubmittedB) {
-      return console.log('working');
+
+    if (!isSubmittedA || !isSubmittedB) {
+      return alert('You must submit a story.');
     }
-    alert('You must submit a story.');
+
+    onNextPageClick(textA, textB, contents);
+    setNextClicked(true);
+    setTextA('');
+    setTextB('');
+    setContents([]);
+    setIsSubmittedA(false);
+    setIsSubmittedB(false);
   };
 
   const _submit = text => {
@@ -44,34 +57,43 @@ export default function NewStory({ location, history }) {
         </span>
       </section>
       <section>
+        <div>
+          {newStoryPages.map(page => (
+            <NewStoryThumbnail key={page} data={page} />
+          ))}
+        </div>
+      </section>
+      <section>
         <InputFile setFiles={_setContents} />
       </section>
       <section>
-        <button onClick={_onNextPageClick}> HELLO </button>
+        <button onClick={_onNextPageClick}> left </button>
         <div className="pages">
           <div>
             <NewStoryPage
               method={method}
-              text={textA}
-              isSubmitted={isSubmittedA}
               content={contents[0]}
               submit={_setTextA}
+              isSubmitted={isSubmittedA}
               setIsSubmitted={_setIsSubmittedA}
+              isNewPage={nextClicked}
+              setIsNewPage={_setNextClicked}
             />
           </div>
           <div>
             <NewStoryPage
               method={method}
-              text={textB}
-              isSubmitted={isSubmittedB}
               content={contents[1]}
               submit={_setTextB}
+              isSubmitted={isSubmittedB}
               setIsSubmitted={_setIsSubmittedB}
+              isNewPage={nextClicked}
+              setIsNewPage={_setNextClicked}
             />
           </div>
         </div>
-        <button onClick={_onNextPageClick}> HELLO </button>
+        <button onClick={_onNextPageClick}> right </button>
       </section>
     </StyledNewStory>
   );
-};
+}

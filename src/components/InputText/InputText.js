@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
 import { StyledForm } from './InputText.styled';
 
-export default function InputText({ submit, isSubmitted, setIsSubmitted }) {
+export default function InputText(props) {
+  const {
+    submit,
+    isSubmitted,
+    setIsSubmitted,
+    isNewPage,
+    setIsNewPage
+  } = props;
+
   const [ text, setText ] = useState('');
+
+  if (isNewPage && text) setText('');
 
   const _onChange = e => {
     setText(e);
     setIsSubmitted(false);
+    setIsNewPage();
   };
 
   const _submit = e => {

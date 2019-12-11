@@ -20,6 +20,6 @@ export const StyledNewStoryPage = styled.div`
     width: 90%;
     height: 80%;
     background-size: cover;
-    // background-position: center;
+    background-position: center;
   }
 `;

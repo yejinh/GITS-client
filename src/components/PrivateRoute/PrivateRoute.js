@@ -16,8 +16,7 @@ export default function PrivateRoute(Component) {
       <Route
         render={props => token
           ? <Component {...props} />
-          : <Redirect to="/login" />}
-      />
+          : <Redirect to="/login" />} />
     );
   }
 

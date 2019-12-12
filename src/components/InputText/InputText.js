@@ -32,8 +32,7 @@ export default function InputText(props) {
   return (
     <StyledForm
       onSubmit={_submit}
-      isSubmitted={isSubmitted}
-    >
+      isSubmitted={isSubmitted}>
       <textarea
         onChange={e => _onChange(e.target.value)}
         value={text}

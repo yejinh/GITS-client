@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import NewStory from '../components/NewStory/NewStory';
 import { addPages, submitNewStory } from '../actions';
 
-const dispatchNextPage = dispatch => (textA, textB, contents) => {
-  dispatch(addPages(textA, textB, contents));
+const dispatchNextPage = dispatch => (textA, textB, contents, audioUrl) => {
+  dispatch(addPages(textA, textB, contents, audioUrl));
 };
 
 const dispatchSubmit = dispatch => newStory => {

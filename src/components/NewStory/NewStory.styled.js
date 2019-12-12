@@ -47,7 +47,7 @@ export const StyledNewStory = styled.div`
     :nth-child(3) {
       border: 1px solid ${vars.$black};
 
-      > div:first-child {
+      .left-buttons, .right-buttons{
         display: flex;
         width: 10%;
         flex-direction: column;

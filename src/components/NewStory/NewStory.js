@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import Burger from '../Burger/Burger';
 import NewStoryThumbnail from '../NewStoryThumbnail/NewStoryThumbnail';
 import InputFile from '../InputFile/InputFile';
+import AudioPlayer from '../AudioPlayer/AudioPlayer';
 import NewStoryPage from '../NewStoryPage/NewStoryPage';
 import { StyledNewStory } from './NewStory.styled';
-import { submitStory } from '../../actions';
+import Icon from '../Icon.Styled';
+import LEFT_BUTTON from './src/left-button.png';
+import RIGHT_BUTTON from './src/right-button.png';
+
 
 export default function NewStory(props) {
   const { location, history, newStoryPages, addPages, submitNewStory } = props;
@@ -12,6 +16,7 @@ export default function NewStory(props) {
   const [ textA, setTextA ] = useState('');
   const [ textB, setTextB ] = useState('');
   const [ contents, setContents ] = useState([]);
+  const [ audioUrl, setAudioUrl ] = useState(null);
   const [ isSubmittedA, setIsSubmittedA ] = useState(false);
   const [ isSubmittedB, setIsSubmittedB ] = useState(false);
   const [ nextClicked, setNextClicked ] = useState(false);
@@ -25,6 +30,7 @@ export default function NewStory(props) {
   const _setTextA = text => setTextA(text);
   const _setTextB = text => setTextB(text);
   const _setContents = content => setContents(content);
+  const _setAudioUrl = audioFile => setAudioUrl(audioFile);
   const _setIsSubmittedA = data => setIsSubmittedA(data);
   const _setIsSubmittedB = data => setIsSubmittedB(data);
   const _setNextClicked = () => setNextClicked(false);
@@ -37,17 +43,22 @@ export default function NewStory(props) {
       return alert('You must submit a story.');
     }
 
-    addPages(textA, textB, contents);
+    addPages(textA, textB, contents, audioUrl);
     setNextClicked(true);
     setTextA('');
     setTextB('');
     setContents([]);
+    setAudioUrl(null);
     setIsSubmittedA(false);
     setIsSubmittedB(false);
   };
 
-  const _submitNewStory = text => {
-    submitNewStory(newStoryPages);
+  const _openModal = (title, cover) => {
+
+  };
+
+  const _submitNewStory = (title, cover) => {
+    submitNewStory(title, cover,newStoryPages);
   };
 
   return (
@@ -70,7 +81,12 @@ export default function NewStory(props) {
       <section>
         <div className="left-buttons">
           <InputFile setFiles={_setContents} />
-          <button onClick={_addPages}> left </button>
+          <AudioPlayer
+            audioUrl={audioUrl}
+            setAudioUrl={_setAudioUrl} />
+          <Icon
+            icon={LEFT_BUTTON}
+            size={"100"} />
         </div>
         <div className="pages">
           <div>
@@ -81,8 +97,7 @@ export default function NewStory(props) {
               isSubmitted={isSubmittedA}
               setIsSubmitted={_setIsSubmittedA}
               isNewPage={nextClicked}
-              setIsNewPage={_setNextClicked}
-            />
+              setIsNewPage={_setNextClicked} />
           </div>
           <div>
             <NewStoryPage
@@ -92,12 +107,16 @@ export default function NewStory(props) {
               isSubmitted={isSubmittedB}
               setIsSubmitted={_setIsSubmittedB}
               isNewPage={nextClicked}
-              setIsNewPage={_setNextClicked}
-            />
+              setIsNewPage={_setNextClicked} />
           </div>
         </div>
-        <button onClick={_addPages}> right </button>
-        <button onClick={_submitNewStory}> submit </button>
+        <div className="right-buttons">
+          <button onClick={_submitNewStory}> submit </button>
+          <Icon
+            icon={RIGHT_BUTTON}
+            size={"100"}
+            onClick={_addPages} />
+        </div>
       </section>
     </StyledNewStory>
   );

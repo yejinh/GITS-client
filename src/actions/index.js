@@ -15,11 +15,12 @@ export const fetchUserData = userData => ({
   userData
 });
 
-export const addPages = (textA, textB, contents) => ({
+export const addPages = (textA, textB, contents, audioUrl) => ({
   type: actionTypes.ADD_PAGES,
   pageData: {
     texts: [textA, textB],
-    contents: contents
+    contents: contents,
+    audioUrl: audioUrl
   }
 });
 

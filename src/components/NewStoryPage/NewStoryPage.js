@@ -34,8 +34,7 @@ export default function NewStoryPage(props) {
         isSubmitted={isSubmitted}
         setIsSubmitted={setIsSubmitted}
         isNewPage={isNewPage}
-        setIsNewPage={setIsNewPage}
-      />
+        setIsNewPage={setIsNewPage} />
     </StyledNewStoryPage>
   );
 }

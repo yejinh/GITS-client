@@ -19,16 +19,19 @@ export default function NewStoryOptions({ location }) {
   return (
     <>
       <Header />
-      <Burger isOpen={isNavOpened} onButtonClick={_handleNav} />
-      <Nav isOpen={isNavOpened} user={user}/>
+      <Burger
+        isOpen={isNavOpened}
+        onButtonClick={_handleNav} />
+      <Nav
+        isOpen={isNavOpened}
+        user={user}/>
       <StyledNewStoryOptions>
         <section>
           <Link to={{
             pathname: "/new-story",
             state: {
               method: "draw"
-            }
-          }}>
+            }}}>
             <Icon icon={DRAW_ICON} size={"150"} />
             <div>Draw your own</div>
           </Link>
@@ -38,8 +41,7 @@ export default function NewStoryOptions({ location }) {
             pathname: "/new-story",
             state: {
               method: "upload"
-            }
-          }}>
+            }}}>
             <Icon icon={UPLOAD_ICON} size={"150"} />
             <div>Upload images</div>
           </Link>

@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { ReactMic } from 'react-mic';
 import { StyledAudioPlayer } from './AudioPlayer.styled';
 
-export default function AudioPlayer() {
+export default function AudioPlayer({ audioUrl, setAudioUrl }) {
   const [ isRecording, setIsRecording ] = useState(false);
-  const [ audioUrl, setAudioUrl ] = useState(null);
   const [ isPlaying, setIsPlaying ] = useState(true);
   const [ duration, setDuration ] = useState();
   const [ curTime, setCurTime ] = useState();

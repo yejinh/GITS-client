@@ -7,7 +7,6 @@ export default function InputFile({ setFiles }) {
       return alert("Please select max 2 files.");
     }
 
-    // files.map(file => URL.createObjectURL(file));
     setFiles(files);
   };
 

@@ -18,7 +18,12 @@ export const fetchUserData = userData => ({
 export const addPages = (textA, textB, contents) => ({
   type: actionTypes.ADD_PAGES,
   pageData: {
-    pageA: [textA, contents[0]],
-    pageB: [textB, contents[1]]
+    texts: [textA, textB],
+    contents: contents
   }
+});
+
+export const submitNewStory = newStory => ({
+  type: actionTypes.SUBMIT_STORY,
+  newStory
 });

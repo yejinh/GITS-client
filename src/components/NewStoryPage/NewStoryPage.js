@@ -1,5 +1,6 @@
 import React from 'react';
 import InputText from '../InputText/InputText';
+import AudioPlayer from '../AudioPlayer/AudioPlayer';
 import { StyledNewStoryPage } from './NewStoryPage.styled';
 import Icon from '../Icon.Styled';
 import UPLOAD_ICON from '../NewStoryOptions/src/upload.png';

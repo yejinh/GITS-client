@@ -4,9 +4,10 @@ import NewStoryThumbnail from '../NewStoryThumbnail/NewStoryThumbnail';
 import InputFile from '../InputFile/InputFile';
 import NewStoryPage from '../NewStoryPage/NewStoryPage';
 import { StyledNewStory } from './NewStory.styled';
+import { submitStory } from '../../actions';
 
 export default function NewStory(props) {
-  const { location, history, onNextPageClick, newStoryPages } = props;
+  const { location, history, newStoryPages, addPages, submitNewStory } = props;
 
   const [ textA, setTextA ] = useState('');
   const [ textB, setTextB ] = useState('');
@@ -27,7 +28,7 @@ export default function NewStory(props) {
   const _setIsSubmittedA = data => setIsSubmittedA(data);
   const _setIsSubmittedB = data => setIsSubmittedB(data);
   const _setNextClicked = () => setNextClicked(false);
-  const _onNextPageClick = () => {
+  const _addPages = () => {
     if (contents.length < 2) {
       return alert('You must upload contents on both pages.');
     }
@@ -36,7 +37,7 @@ export default function NewStory(props) {
       return alert('You must submit a story.');
     }
 
-    onNextPageClick(textA, textB, contents);
+    addPages(textA, textB, contents);
     setNextClicked(true);
     setTextA('');
     setTextB('');
@@ -45,29 +46,32 @@ export default function NewStory(props) {
     setIsSubmittedB(false);
   };
 
-  const _submit = text => {
-    console.log(text);
+  const _submitNewStory = text => {
+    submitNewStory(newStoryPages);
   };
 
   return (
     <StyledNewStory>
       <section>
-        <span>
+        <div>
           <Burger isOpen={true} onButtonClick={_handleExit} />
-        </span>
+        </div>
       </section>
       <section>
-        <div>
-          {newStoryPages.map(page => (
-            <NewStoryThumbnail key={page} data={page} />
+        <div className="thumnails">
+          {newStoryPages.map((page, i) => (
+            <NewStoryThumbnail
+              key={page.texts}
+              contents={page.contents}
+              pageNumber={i + 1} />
           ))}
         </div>
       </section>
       <section>
-        <InputFile setFiles={_setContents} />
-      </section>
-      <section>
-        <button onClick={_onNextPageClick}> left </button>
+        <div className="left-buttons">
+          <InputFile setFiles={_setContents} />
+          <button onClick={_addPages}> left </button>
+        </div>
         <div className="pages">
           <div>
             <NewStoryPage
@@ -92,7 +96,8 @@ export default function NewStory(props) {
             />
           </div>
         </div>
-        <button onClick={_onNextPageClick}> right </button>
+        <button onClick={_addPages}> right </button>
+        <button onClick={_submitNewStory}> submit </button>
       </section>
     </StyledNewStory>
   );

@@ -1,9 +1,14 @@
 import { connect } from 'react-redux';
 import NewStory from '../components/NewStory/NewStory';
-import { addPages } from '../actions';
+import { addPages, submitNewStory } from '../actions';
 
 const dispatchNextPage = dispatch => (textA, textB, contents) => {
   dispatch(addPages(textA, textB, contents));
+};
+
+const dispatchSubmit = dispatch => newStory => {
+  console.log(newStory);
+  dispatch(submitNewStory(newStory));
 };
 
 const mapStateToProps = state => ({
@@ -12,7 +17,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onNextPageClick: dispatchNextPage(dispatch)
+  addPages: dispatchNextPage(dispatch),
+  submitNewStory: dispatchSubmit(dispatch)
 });
 
 export default connect(

@@ -4,10 +4,10 @@ import * as vars from '../variables';
 export const StyledNewStoryPage = styled.div`
   // border: 1px solid ${vars.$black};
   width: 100%;
-  height: 70vh;
+  height: 60vh;
 
   .content {
-    border: 1px solid ${vars.$black};
+    // border: 1px solid ${vars.$black};
     display: flex;
     width: 100%;
     height: 80%;

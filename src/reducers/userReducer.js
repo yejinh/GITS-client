@@ -1,5 +1,6 @@
 import {
   LOGIN,
+  LOGOUT,
   IS_LOADING,
   FETCH_USER_DATA
 } from '../constants/actionType';
@@ -20,6 +21,14 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: true
+      };
+
+    case LOGOUT:
+      localStorage.removeItem('ACCESS_TOKEN');
+
+      return {
+        ...state,
+        isLoggedIn: false
       };
 
     case IS_LOADING:

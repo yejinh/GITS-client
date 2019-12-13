@@ -20,7 +20,6 @@ export const StyledNewStory = styled.div`
 
     > button {
       display: inline-block;
-      margin: 0 auto;
     }
 
     .pages {
@@ -44,13 +43,15 @@ export const StyledNewStory = styled.div`
       }
     }
 
-    :nth-child(3) {
-      border: 1px solid ${vars.$black};
+    :nth-child(4) {
+      // border: 1px solid ${vars.$black};
+      height: 65vh;
+      justify-content: space-around;
 
       .left-buttons, .right-buttons{
         display: flex;
-        width: 10%;
-        flex-direction: column;
+        width: 5%;
+        align-items: center;
       }
     }
   }

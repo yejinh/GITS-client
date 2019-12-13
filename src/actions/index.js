@@ -5,6 +5,10 @@ export const login = token => ({
   token
 });
 
+export const logout = () => ({
+  type: actionTypes.LOGOUT
+});
+
 export const isLoading = data => ({
   type: actionTypes.IS_LOADING,
   data

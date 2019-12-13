@@ -1,8 +1,8 @@
-import React from 'react';
+import React  from 'react';
 import { Link } from 'react-router-dom';
 import { StyledNav } from './Nav.styled';
 
-export default function Nav({ isOpen, user }) {
+export default function Nav({ isOpen, user, logout }) {
   return (
     <StyledNav isOpen={isOpen}>
       <section>
@@ -19,6 +19,7 @@ export default function Nav({ isOpen, user }) {
           }
         }}>New Story</Link>
       </section>
+      <Link to="/" className="logout" onClick={logout}>로그아웃</Link>
     </StyledNav>
   );
 }

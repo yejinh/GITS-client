@@ -12,7 +12,7 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={PrivateRoute(HomeContainer)} />
         <Route path="/login" component={LoginContainer} />}
-        <Route exact path="/new-story/options" component={NewStoryOptions} />
+        <Route exact path="/new-story/options" component={PrivateRoute(NewStoryOptions)} />
         <Route exact path="/new-story" component={PrivateRoute(NewStoryContainer)} />
       </Switch>
     </Router>

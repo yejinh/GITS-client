@@ -6,6 +6,26 @@ const Icon = styled.div`
   background-image: url(${props => props.icon});
   background-size: cover;
   background-position: center;
+  transition: all .5s ease;
+  opacity: ${props =>
+    props.opacity === "true"
+      ? 0.3
+      : 1};
+
+  :hover {
+    opacity: ${props =>
+      props.disable === "true"
+        ? 0.3
+        : 1};
+    transform: ${props =>
+      props.disable === "true"
+        ? "scale(1)"
+        : "scale(1.08)"};
+    cursor: ${props =>
+      props.disable === "true"
+        ? "auto"
+        : "pointer"};
+  }
 `;
 
 export default Icon;

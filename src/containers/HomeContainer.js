@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import axios from 'axios';
 import Home from '../components/Home/Home';
-import { isLoading, fetchUserData } from '../actions';
+import { isLoading, fetchUserData, logout } from '../actions';
 
 const dispatchFetchUserData = dispatch => async() => {
   try {
@@ -21,13 +21,18 @@ const dispatchFetchUserData = dispatch => async() => {
   }
 };
 
+const dispatchLogout = dispatch => () => {
+  dispatch(logout());
+};
+
 const mapStateToProps = state => ({
   isLoading: state.userData.isLoading,
   user: state.userData.user
 });
 
 const mapDispatchToProps = dispatch => ({
-  fatchUserData: dispatchFetchUserData(dispatch)
+  fatchUserData: dispatchFetchUserData(dispatch),
+  logout: dispatchLogout(dispatch)
 });
 
 export default connect(

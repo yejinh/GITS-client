@@ -9,9 +9,9 @@ import Icon from '../Icon.Styled';
 import LEFT_BUTTON from './src/left-button.png';
 import RIGHT_BUTTON from './src/right-button.png';
 
-
 export default function NewStory(props) {
   const { location, history, newStoryPages, addPages, submitNewStory } = props;
+  console.log(newStoryPages);
 
   const [ textA, setTextA ] = useState('');
   const [ textB, setTextB ] = useState('');
@@ -53,10 +53,6 @@ export default function NewStory(props) {
     setIsSubmittedB(false);
   };
 
-  const _openModal = (title, cover) => {
-
-  };
-
   const _submitNewStory = (title, cover) => {
     submitNewStory(title, cover,newStoryPages);
   };
@@ -79,14 +75,23 @@ export default function NewStory(props) {
         </div>
       </section>
       <section>
-        <div className="left-buttons">
+        <div>
           <InputFile setFiles={_setContents} />
-          <AudioPlayer
-            audioUrl={audioUrl}
-            setAudioUrl={_setAudioUrl} />
+        </div>
+        <AudioPlayer
+          audioUrl={audioUrl}
+          setAudioUrl={_setAudioUrl} />
+        <div>
+          <button onClick={_submitNewStory}> submit </button>
+        </div>
+      </section>
+      <section>
+        <div className="left-buttons">
           <Icon
             icon={LEFT_BUTTON}
-            size={"100"} />
+            size={"100"}
+            opacity="true"
+            disable={newStoryPages.length ? "false" : "true"} />
         </div>
         <div className="pages">
           <div>
@@ -111,10 +116,10 @@ export default function NewStory(props) {
           </div>
         </div>
         <div className="right-buttons">
-          <button onClick={_submitNewStory}> submit </button>
           <Icon
             icon={RIGHT_BUTTON}
             size={"100"}
+            opacity="true"
             onClick={_addPages} />
         </div>
       </section>

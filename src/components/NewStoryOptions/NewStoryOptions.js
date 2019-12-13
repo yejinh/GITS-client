@@ -24,7 +24,7 @@ export default function NewStoryOptions({ location }) {
         onButtonClick={_handleNav} />
       <Nav
         isOpen={isNavOpened}
-        user={user}/>
+        user={user} />
       <StyledNewStoryOptions>
         <section>
           <Link to={{

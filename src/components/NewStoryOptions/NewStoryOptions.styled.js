@@ -17,10 +17,6 @@ export const StyledNewStoryOptions = styled.div`
     text-align: center;
     border-radius: 50px;
     transition: all 1s ease;
-
-    :hover {
-      background-color: ${vars.$lightYellow};
-    }
   }
 
   a {
@@ -38,7 +34,7 @@ export const StyledNewStoryOptions = styled.div`
     transition: all .5s ease;
 
     :hover {
-      background-color: ${vars.$lightYellow};
+      background-color: ${vars.$ivory};
       box-shadow: 0 0 10px ${vars.$shadowGray};
     }
 

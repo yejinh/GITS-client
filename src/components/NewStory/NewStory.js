@@ -11,7 +11,6 @@ import RIGHT_BUTTON from './src/right-button.png';
 
 export default function NewStory(props) {
   const { location, history, newStoryPages, addPages, submitNewStory } = props;
-  console.log(newStoryPages);
 
   const [ textA, setTextA ] = useState('');
   const [ textB, setTextB ] = useState('');
@@ -65,16 +64,6 @@ export default function NewStory(props) {
         </div>
       </section>
       <section>
-        <div className="thumnails">
-          {newStoryPages.map((page, i) => (
-            <NewStoryThumbnail
-              key={page.texts}
-              contents={page.contents}
-              pageNumber={i + 1} />
-          ))}
-        </div>
-      </section>
-      <section>
         <div>
           <InputFile setFiles={_setContents} />
         </div>
@@ -86,6 +75,14 @@ export default function NewStory(props) {
         </div>
       </section>
       <section>
+        <div className="thumnails">
+          {newStoryPages.map((page, i) => (
+            <NewStoryThumbnail
+              key={page.texts}
+              contents={page.contents}
+              pageNumber={i + 1} />
+          ))}
+        </div>
         <div className="left-buttons">
           <Icon
             icon={LEFT_BUTTON}

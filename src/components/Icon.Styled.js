@@ -17,10 +17,6 @@ const Icon = styled.div`
       props.disable === "true"
         ? 0.3
         : 1};
-    transform: ${props =>
-      props.disable === "true"
-        ? "scale(1)"
-        : "scale(1.08)"};
     cursor: ${props =>
       props.disable === "true"
         ? "auto"

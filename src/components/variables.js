@@ -1,6 +1,7 @@
 // colors
 export const $white = '#fff';
-export const $shadowGray = '#b2b2b2';
+export const $shadowGray = '#e0e0e0';
+export const $textGray = '#959595';
 export const $black = '#000';
 export const $ivory = '#f8f3e1';
 export const $orange = '#f15d22';

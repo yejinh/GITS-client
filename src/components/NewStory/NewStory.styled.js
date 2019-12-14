@@ -36,17 +36,20 @@ export const StyledNewStory = styled.div`
       margin-bottom: 10px;
       padding: 10px;
       background-color: white;
+    }
+
+    :nth-child(3) {
+      // border: 1px solid ${vars.$black};
+      height: 80vh;
+      justify-content: space-around;
 
       .thumnails {
         display: flex;
-        background-color: transparent;
+        width: 15%;
+        flex-direction: column;
+        // background-color: transparent;
+        background-color: #000;
       }
-    }
-
-    :nth-child(4) {
-      // border: 1px solid ${vars.$black};
-      height: 65vh;
-      justify-content: space-around;
 
       .left-buttons, .right-buttons{
         display: flex;

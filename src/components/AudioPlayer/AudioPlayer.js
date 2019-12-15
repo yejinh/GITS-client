@@ -5,8 +5,8 @@ import { StyledAudioPlayer } from './AudioPlayer.styled';
 export default function AudioPlayer({ audioUrl, setAudioUrl }) {
   const [ isRecording, setIsRecording ] = useState(false);
   const [ isPlaying, setIsPlaying ] = useState(true);
-  const [ duration, setDuration ] = useState();
-  const [ curTime, setCurTime ] = useState();
+  // const [ duration, setDuration ] = useState();
+  // const [ curTime, setCurTime ] = useState();
 
   const _toggleRecording = () => setIsRecording(!isRecording);
   const _onData = recordedBlob => console.log(recordedBlob);
@@ -36,20 +36,17 @@ export default function AudioPlayer({ audioUrl, setAudioUrl }) {
 
   return (
     <StyledAudioPlayer>
+      <button onClick={_toggleRecording} type="button">Start</button>
       <ReactMic
         record={isRecording}
         className="sound-wave"
         onData={_onData}
         onStop={_onStop}
         strokeColor="#000"
-        backgroundColor="transparent"
+        backgroundColor="#fff"
         mimeType={"audio/wav"}
         bufferSize={2048}
         sampleRate={44100} />
-      <button onClick={_toggleRecording} type="button">Start</button>
-      {/* <audio id="audio">
-        <source src={audioUrl} type="audio/wav" />
-      </audio> */}
       <button onClick={_togglePlaying}>Play</button>
     </StyledAudioPlayer>
   );

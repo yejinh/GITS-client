@@ -3,7 +3,7 @@ import { StyledBurger } from './Burger.styled';
 
 export default function Burger({ isOpen, onButtonClick }) {
   return (
-    <StyledBurger open={isOpen} onClick={onButtonClick}>
+    <StyledBurger isOpen={isOpen} onClick={onButtonClick}>
       <div />
       <div />
       <div />

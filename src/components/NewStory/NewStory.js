@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Burger from '../Burger/Burger';
 import NewStoryThumbnail from '../NewStoryThumbnail/NewStoryThumbnail';
 import InputFile from '../InputFile/InputFile';
@@ -9,8 +9,19 @@ import Icon from '../Icon.Styled';
 import LEFT_BUTTON from './src/left-button.png';
 import RIGHT_BUTTON from './src/right-button.png';
 
-export default function NewStory(props) {
-  const { location, history, newStoryPages, addPages, submitNewStory } = props;
+function NewStory(props) {
+  const {
+    location,
+    history,
+    curPage,
+    curPageNumber,
+    newStoryPages,
+    onPagesAdd,
+    onPrevClick,
+    onNextClick,
+    onNewStorySubmit
+  } = props;
+  const { method } = location.state;
 
   const [ textA, setTextA ] = useState('');
   const [ textB, setTextB ] = useState('');
@@ -20,11 +31,21 @@ export default function NewStory(props) {
   const [ isSubmittedB, setIsSubmittedB ] = useState(false);
   const [ nextClicked, setNextClicked ] = useState(false);
 
-  const { method } = location.state;
+  const isUpdated = useRef(true);
 
-  const _handleExit = () => {
-    history.goBack();
-  };
+  useEffect(() => {
+    if (isUpdated.current) {
+      isUpdated.current = false;
+      return;
+    }
+
+    if (curPage && !textA) {
+      setTextA(curPage.texts[0]);
+      setTextB(curPage.texts[1]);
+      setContents(curPage.contents);
+      setAudioUrl(curPage.audioUrl);
+    }
+  });
 
   const _setTextA = text => setTextA(text);
   const _setTextB = text => setTextB(text);
@@ -33,17 +54,47 @@ export default function NewStory(props) {
   const _setIsSubmittedA = data => setIsSubmittedA(data);
   const _setIsSubmittedB = data => setIsSubmittedB(data);
   const _setNextClicked = () => setNextClicked(false);
-  const _addPages = () => {
+
+  const _handleExit = () => {
+    history.goBack();
+  };
+
+  const _onPrevClick = () => {
+    if (curPageNumber) {
+      _resetState();
+      onPrevClick(curPageNumber - 1);
+    }
+  };
+
+  const _onNextClick = () => {
     if (contents.length < 2) {
       return alert('You must upload contents on both pages.');
     }
 
     if (!isSubmittedA || !isSubmittedB) {
-      return alert('You must submit a story.');
+      return alert('You must save a story.');
     }
 
-    addPages(textA, textB, contents, audioUrl);
+    if (newStoryPages.length - 1 >= curPageNumber) {
+      _resetState();
+      onNextClick(curPageNumber + 1);
+      return;
+    }
+
+    onPagesAdd(textA, textB, contents, audioUrl);
     setNextClicked(true);
+    _resetState();
+  };
+
+  const _onNewStorySubmit = (title, cover) => {
+    if (newStoryPages.length < 2) {
+      return alert('You must submit at least 3 pages');
+    }
+    // onNewStorySubmit(title, cover,newStoryPages);
+    onNewStorySubmit(newStoryPages);
+  };
+
+  const _resetState = () => {
     setTextA('');
     setTextB('');
     setContents([]);
@@ -52,74 +103,81 @@ export default function NewStory(props) {
     setIsSubmittedB(false);
   };
 
-  const _submitNewStory = (title, cover) => {
-    submitNewStory(title, cover,newStoryPages);
-  };
-
   return (
-    <StyledNewStory>
-      <section>
-        <div>
-          <Burger isOpen={true} onButtonClick={_handleExit} />
-        </div>
-      </section>
-      <section>
-        <div>
-          <InputFile setFiles={_setContents} />
-        </div>
-        <AudioPlayer
-          audioUrl={audioUrl}
-          setAudioUrl={_setAudioUrl} />
-        <div>
-          <button onClick={_submitNewStory}> submit </button>
-        </div>
-      </section>
-      <section>
-        <div className="thumnails">
-          {newStoryPages.map((page, i) => (
+    <StyledNewStory isUpdated={isUpdated}>
+      <section className="thumbnails-wrapper">
+        <div className="thumbnails">
+          <div>THUMBNAILS</div>
+          {newStoryPages.map(page => (
             <NewStoryThumbnail
               key={page.texts}
-              contents={page.contents}
-              pageNumber={i + 1} />
-          ))}
-        </div>
-        <div className="left-buttons">
-          <Icon
-            icon={LEFT_BUTTON}
-            size={"100"}
-            opacity="true"
-            disable={newStoryPages.length ? "false" : "true"} />
-        </div>
-        <div className="pages">
+              contents={page.contents} />
+        ))}
+      </div>
+      </section>
+      <section className="story-wrapper">
+        <section className="header-wrapper">
           <div>
-            <NewStoryPage
-              method={method}
-              content={contents[0]}
-              submit={_setTextA}
-              isSubmitted={isSubmittedA}
-              setIsSubmitted={_setIsSubmittedA}
-              isNewPage={nextClicked}
-              setIsNewPage={_setNextClicked} />
+            <Burger isOpen={true} onButtonClick={_handleExit} />
           </div>
+        </section>
+        <section className="buttons-wrapper">
           <div>
-            <NewStoryPage
-              method={method}
-              content={contents[1]}
-              submit={_setTextB}
-              isSubmitted={isSubmittedB}
-              setIsSubmitted={_setIsSubmittedB}
-              isNewPage={nextClicked}
-              setIsNewPage={_setNextClicked} />
+            <InputFile setFiles={_setContents} />
           </div>
-        </div>
-        <div className="right-buttons">
-          <Icon
-            icon={RIGHT_BUTTON}
-            size={"100"}
-            opacity="true"
-            onClick={_addPages} />
-        </div>
+          <AudioPlayer
+            audioUrl={audioUrl}
+            setAudioUrl={_setAudioUrl} />
+          <div>
+            <button
+              className="submit-button"
+              onClick={_onNewStorySubmit}>
+                submit
+            </button>
+          </div>
+        </section>
+        <section className="pages-wrapper">
+          <div className="left-buttons">
+            <Icon
+              icon={LEFT_BUTTON}
+              size={"100"}
+              opacity="true"
+              disable={curPageNumber}
+              onClick={_onPrevClick} />
+          </div>
+          <div className="pages">
+            <div>
+              <NewStoryPage
+                method={method}
+                content={contents[0]}
+                submit={_setTextA}
+                isSubmitted={isSubmittedA}
+                setIsSubmitted={_setIsSubmittedA}
+                isNewPage={nextClicked}
+                setIsNewPage={_setNextClicked} />
+            </div>
+            <div>
+              <NewStoryPage
+                method={method}
+                content={contents[1]}
+                submit={_setTextB}
+                isSubmitted={isSubmittedB}
+                setIsSubmitted={_setIsSubmittedB}
+                isNewPage={nextClicked}
+                setIsNewPage={_setNextClicked} />
+            </div>
+          </div>
+          <div className="right-buttons">
+            <Icon
+              icon={RIGHT_BUTTON}
+              size={"100"}
+              opacity="true"
+              onClick={_onNextClick} />
+          </div>
+        </section>
       </section>
     </StyledNewStory>
   );
 }
+
+export default React.memo(NewStory);

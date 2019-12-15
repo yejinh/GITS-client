@@ -3,6 +3,8 @@ import { StyledForm } from './InputText.styled';
 
 export default function InputText(props) {
   const {
+    test,
+    visible,
     submit,
     isSubmitted,
     setIsSubmitted,
@@ -10,7 +12,9 @@ export default function InputText(props) {
     setIsNewPage
   } = props;
 
-  const [ text, setText ] = useState('');
+  console.log(visible);
+
+  const [ text, setText ] = useState(test || '');
 
   if (isNewPage && text) setText('');
 
@@ -23,7 +27,9 @@ export default function InputText(props) {
   const _submit = e => {
     e.preventDefault();
 
-    if (!text.length) return alert('You must submit a story.');
+    if (!text.length) {
+      return alert('You must type a story.');
+    }
 
     submit(text);
     setIsSubmitted(true);
@@ -32,17 +38,14 @@ export default function InputText(props) {
   return (
     <StyledForm
       onSubmit={_submit}
-      isSubmitted={isSubmitted}>
+      isSubmitted={isSubmitted}
+      visible={visible} >
       <textarea
         onChange={e => _onChange(e.target.value)}
-        value={text}
-      />
+        value={text} />
       <input
         type="submit"
-        value={isSubmitted
-          ? "Submitted"
-          : "Submit"
-      }/>
+        value=" " />
     </StyledForm>
   );
 }

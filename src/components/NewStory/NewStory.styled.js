@@ -2,60 +2,85 @@ import styled from 'styled-components';
 import * as vars from '../variables';
 
 export const StyledNewStory = styled.div`
+  display: flex;
+
   section {
     display: flex;
+  }
 
-    :first-child {
-      justify-content: flex-end;
-      margin-right: 50px;
-      height: 70px;
+  .story-wrapper {
+    width: 100%;
+    flex-direction: column;
+  }
 
-      > div {
-        display: inline-block;
-        position: relative;
-        width: 50px;
-        height: 50px;
+  .thumbnails-wrapper {
+    height: 100vh;
+    padding: 10px;
+
+    .thumbnails {
+      border: 1px solid ${vars.$black};
+      display: flex;
+      width: 300px;
+      padding: 50px 0 0;
+      flex-direction: column;
+      overflow: scroll;
+      align-items: center;
+
+      > div:first-child {
+        margin-bottom: 50px;
+        color: ${vars.$black};
       }
+    }
+  }
+
+  .header-wrapper {
+    justify-content: flex-end;
+    margin-right: 50px;
+    height: 70px;
+
+    > div {
+      display: inline-block;
+      position: relative;
+      width: 50px;
+      height: 50px;
     }
 
     > button {
       display: inline-block;
     }
+  }
+
+  .buttons-wrapper {
+    height: 100px;
+    padding: 10px;
+    justify-content: space-around;
+  }
+
+  .submit-button {
+    display: inline-block;
+    width: 150px;
+    height: 45px;
+    border-radius: 5px;
+    pointer: cursor;
+  }
+
+  .pages-wrapper {
+    justify-content: space-around;
 
     .pages {
       display: flex;
       width: 80%;
 
       > div {
+        position: relative;
         width: 100%;
       }
     }
 
-    :nth-child(2) {
-      height: 100px;
-      margin-bottom: 10px;
-      padding: 10px;
-      background-color: white;
-    }
-
-    :nth-child(3) {
-      // border: 1px solid ${vars.$black};
-      height: 80vh;
-      justify-content: space-around;
-
-      .thumnails {
-        display: flex;
-        width: 15%;
-        flex-direction: column;
-        // background-color: transparent;
-        background-color: #000;
-      }
-
-      .left-buttons, .right-buttons{
-        display: flex;
-        width: 5%;
-        align-items: center;
-      }
+    .left-buttons, .right-buttons {
+      display: flex;
+      width: 5%;
+      align-items: center;
     }
   }
 

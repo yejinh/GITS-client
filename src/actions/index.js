@@ -28,6 +28,16 @@ export const addPages = (textA, textB, contents, audioUrl) => ({
   }
 });
 
+export const prevPage = pageNumber => ({
+  type: actionTypes.PREV_PAGE,
+  pageNumber
+});
+
+export const nextPage = pageNumber => ({
+  type: actionTypes.NEXT_PAGE,
+  pageNumber
+});
+
 export const submitNewStory = newStory => ({
   type: actionTypes.SUBMIT_STORY,
   newStory

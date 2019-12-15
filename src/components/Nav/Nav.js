@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../Icon.Styled';
 import LIKE from './src/like.png';
@@ -18,7 +18,12 @@ export default function Nav({ isOpen, user, logout }) {
         <div>{user.email}</div>
       </section>
       <section>
-        <Link to="/">
+        <Link to={{
+          pathname: "/",
+          state: {
+            isOpen: isOpen
+          }
+        }}>
           <span className="bar-left first" />
             Home
           <span className="bar-right first" />
@@ -26,7 +31,8 @@ export default function Nav({ isOpen, user, logout }) {
         <Link to={{
           pathname: "/new-story/options",
           state: {
-            user: user
+            user: user,
+            isOpen: isOpen
           }
         }}>
           <span className="bar-left second" />
@@ -36,7 +42,8 @@ export default function Nav({ isOpen, user, logout }) {
         <Link to={{
           pathname: "/new-story/options",
           state: {
-            user: user
+            user: user,
+            isOpen: isOpen
           }
         }}>
           <span className="bar-left third" />

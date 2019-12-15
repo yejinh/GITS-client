@@ -4,7 +4,7 @@ import * as vars from '../variables';
 export const StyledNewStoryPage = styled.div`
   // border: 1px solid ${vars.$black};
   width: 100%;
-  height: 60vh;
+  height: 80vh;
 
   .content {
     // border: 1px solid ${vars.$black};

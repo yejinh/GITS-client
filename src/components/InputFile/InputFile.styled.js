@@ -3,6 +3,7 @@ import * as vars from '../variables';
 
 export const StyledInputFile = styled.button`
   border: none;
+  width: 160px;
 
   :focus {
     outline: 0;
@@ -18,7 +19,6 @@ export const StyledInputFile = styled.button`
     border: none;
     position: relative;
     display: inline-block;
-    margin-bottom: 1rem;
     padding: 1rem 50px;
     vertical-align: middle;
     font-family: ${vars.$serif};

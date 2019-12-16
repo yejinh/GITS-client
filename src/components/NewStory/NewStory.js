@@ -5,6 +5,7 @@ import InputFile from '../InputFile/InputFile';
 import AudioPlayer from '../AudioPlayer/AudioPlayer';
 import NewStoryPage from '../NewStoryPage/NewStoryPage';
 import { StyledNewStory } from './NewStory.styled';
+import { StyledInput } from '../Input.styled';
 import Icon from '../Icon.Styled';
 import LEFT_BUTTON from './src/left-button.png';
 import RIGHT_BUTTON from './src/right-button.png';
@@ -32,6 +33,7 @@ function NewStory(props) {
   const [ nextClicked, setNextClicked ] = useState(false);
 
   const isUpdated = useRef(true);
+  // const testRef = useRef(null);
 
   useEffect(() => {
     if (isUpdated.current) {
@@ -62,6 +64,7 @@ function NewStory(props) {
   const _onPrevClick = () => {
     if (curPageNumber) {
       _resetState();
+      setNextClicked(false);
       onPrevClick(curPageNumber - 1);
     }
   };
@@ -78,18 +81,24 @@ function NewStory(props) {
     if (newStoryPages.length - 1 >= curPageNumber) {
       _resetState();
       onNextClick(curPageNumber + 1);
+
+      if (newStoryPages.length - 1 === curPageNumber) {
+        setNextClicked(true)
+      };
+
       return;
     }
 
     onPagesAdd(textA, textB, contents, audioUrl);
-    setNextClicked(true);
     _resetState();
+    setNextClicked(true);
   };
 
   const _onNewStorySubmit = (title, cover) => {
     if (newStoryPages.length < 2) {
       return alert('You must submit at least 3 pages');
     }
+
     // onNewStorySubmit(title, cover,newStoryPages);
     onNewStorySubmit(newStoryPages);
   };
@@ -104,7 +113,7 @@ function NewStory(props) {
   };
 
   return (
-    <StyledNewStory isUpdated={isUpdated}>
+    <StyledNewStory ref={isUpdated}>
       <section className="thumbnails-wrapper">
         <div className="thumbnails">
           <div>THUMBNAILS</div>
@@ -129,11 +138,13 @@ function NewStory(props) {
             audioUrl={audioUrl}
             setAudioUrl={_setAudioUrl} />
           <div>
-            <button
-              className="submit-button"
-              onClick={_onNewStorySubmit}>
-                submit
-            </button>
+            <StyledInput>
+              <input
+                type="submit"
+                id="submit"
+                onClick={_onNewStorySubmit} />
+              <label htmlFor="submit">Submit Story</label>
+            </StyledInput>
           </div>
         </section>
         <section className="pages-wrapper">
@@ -149,6 +160,7 @@ function NewStory(props) {
             <div>
               <NewStoryPage
                 method={method}
+                initialText={textA}
                 content={contents[0]}
                 submit={_setTextA}
                 isSubmitted={isSubmittedA}
@@ -159,6 +171,7 @@ function NewStory(props) {
             <div>
               <NewStoryPage
                 method={method}
+                initialText={textB}
                 content={contents[1]}
                 submit={_setTextB}
                 isSubmitted={isSubmittedB}

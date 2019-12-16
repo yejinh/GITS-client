@@ -23,8 +23,9 @@ export const StyledNewStory = styled.div`
       width: 300px;
       padding: 50px 0 0;
       flex-direction: column;
-      overflow: scroll;
       align-items: center;
+      border-radius: 5px;
+      overflow: scroll;
 
       > div:first-child {
         margin-bottom: 50px;
@@ -52,16 +53,20 @@ export const StyledNewStory = styled.div`
 
   .buttons-wrapper {
     height: 100px;
-    padding: 10px;
-    justify-content: space-around;
-  }
+    padding: 0 10%;
+    justify-content: space-between;
 
-  .submit-button {
-    display: inline-block;
-    width: 150px;
-    height: 45px;
-    border-radius: 5px;
-    pointer: cursor;
+    > div:first-child {
+      width: 165px;
+
+      button {
+        width: 100%;
+      }
+    }
+
+    > div:nth-child(2) {
+      height: 45px;
+    }
   }
 
   .pages-wrapper {

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import * as vars from '../variables';
 
 export const StyledNewStoryPage = styled.div`
-  // border: 1px solid ${vars.$black};
+  border: 1px solid ${vars.$black};
   width: 100%;
   height: 80vh;
 

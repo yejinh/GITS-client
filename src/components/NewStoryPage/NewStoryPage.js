@@ -6,8 +6,9 @@ import UPLOAD_ICON from '../NewStoryOptions/src/upload.png';
 
 export default function NewStoryPage(props) {
   const {
-    method,
-    text,
+    // testRef,
+    // method,
+    initialText,
     content,
     submit,
     isSubmitted,
@@ -27,7 +28,8 @@ export default function NewStoryPage(props) {
         }
       </div>
       <InputText
-        test={"test"}
+        // ref={testRef}
+        initialText={initialText}
         visible={content ? "visible" : "hidden"}
         submit={submit}
         isSubmitted={isSubmitted}

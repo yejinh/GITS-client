@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import * as vars from '../variables';
+import * as vars from './variables';
 
-export const StyledInputFile = styled.button`
+export const StyledInput = styled.button`
   border: none;
-  width: 160px;
 
   :focus {
     outline: 0;

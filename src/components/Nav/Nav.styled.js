@@ -59,36 +59,38 @@ export const StyledNav = styled.div`
       a {
         position: relative;
         width: 180px;
-        padding-bottom: 10%;
+        height: 45px;
+        margin-bottom: 10%;
         text-align: center;
         overflow: hidden;
         color: ${vars.$black};
 
-      .bar-left, .bar-right {
-        display: inline-block;
-        position: absolute;
-        top: 10px;
-      }
+        .bar-left, .bar-right {
+          display: inline-block;
+          position: absolute;
+          top: 20%;
+        }
 
-      .bar-left {
-        left: 0;
-      }
+        .bar-left {
+          left: 0;
+        }
 
-      .bar-right {
-        right: 0;
-      }
+        .bar-right {
+          right: 0;
+        }
 
-      .first {
-        width: 60px;
-      }
+        .first {
+          width: 60px;
+        }
 
-      .second, .third {
-        width: 45px;
-      }
+        .second, .third {
+          width: 45px;
+        }
 
-      :hover {
-        > span {
-          border-bottom: 1px solid ${vars.$black};
+        :hover {
+          > span {
+            border-bottom: 1px solid ${vars.$black};
+          }
         }
       }
     }

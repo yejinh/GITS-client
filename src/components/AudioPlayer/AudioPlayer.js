@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { ReactMic } from 'react-mic';
 import { StyledAudioPlayer } from './AudioPlayer.styled';
+import Icon from '../Icon.Styled';
+import PLAY from './src/play.png';
+import RECORD from './src/record.png';
 
 export default function AudioPlayer({ audioUrl, setAudioUrl }) {
   const [ isRecording, setIsRecording ] = useState(false);
@@ -13,7 +16,6 @@ export default function AudioPlayer({ audioUrl, setAudioUrl }) {
   const _onStop = recordedBlob => setAudioUrl(recordedBlob.blobURL);
 
   const _togglePlaying = () => {
-    console.log(isPlaying, '1');
     setIsPlaying(!isPlaying);
     _playAudio();
   };
@@ -36,7 +38,18 @@ export default function AudioPlayer({ audioUrl, setAudioUrl }) {
 
   return (
     <StyledAudioPlayer>
-      <button onClick={_toggleRecording} type="button">Start</button>
+      <div className="icon">
+        <Icon
+          icon={RECORD}
+          size="35"
+          onClick={_toggleRecording} />
+      </div>
+      <div className="icon">
+        <Icon
+          icon={PLAY}
+          size="30"
+          onClick={_togglePlaying} />
+      </div>
       <ReactMic
         record={isRecording}
         className="sound-wave"
@@ -47,7 +60,6 @@ export default function AudioPlayer({ audioUrl, setAudioUrl }) {
         mimeType={"audio/wav"}
         bufferSize={2048}
         sampleRate={44100} />
-      <button onClick={_togglePlaying}>Play</button>
     </StyledAudioPlayer>
   );
 }

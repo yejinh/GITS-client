@@ -9,9 +9,16 @@ export default function Nav({ isOpen, user, logout }) {
     <StyledNav isOpen={isOpen}>
       <section>
         <div className="like">
-          <Icon
-            icon={LIKE}
-            size={"32"} />
+          <Link to={{
+            pathname: "/new-story/options",
+            state: {
+              user: user,
+              isOpen: isOpen
+            }}}>
+            <Icon
+              icon={LIKE}
+              size={"32"} />
+          </Link>
         </div>
         <span style={{ backgroundImage: `url(${user.profilePhoto})` }}/>
         <div>{user.name}</div>
@@ -22,8 +29,7 @@ export default function Nav({ isOpen, user, logout }) {
           pathname: "/",
           state: {
             isOpen: isOpen
-          }
-        }}>
+          }}}>
           <span className="bar-left first" />
             Home
           <span className="bar-right first" />
@@ -33,8 +39,7 @@ export default function Nav({ isOpen, user, logout }) {
           state: {
             user: user,
             isOpen: isOpen
-          }
-        }}>
+          }}}>
           <span className="bar-left second" />
             My Stories
           <span className="bar-right second" />
@@ -44,8 +49,7 @@ export default function Nav({ isOpen, user, logout }) {
           state: {
             user: user,
             isOpen: isOpen
-          }
-        }}>
+          }}}>
           <span className="bar-left third" />
             New Story
           <span className="bar-right third" />

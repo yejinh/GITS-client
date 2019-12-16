@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { StyledForm } from './InputText.styled';
 
 export default function InputText(props) {
   const {
-    test,
+    testRef,
+    initialText,
     visible,
     submit,
     isSubmitted,
@@ -12,11 +13,21 @@ export default function InputText(props) {
     setIsNewPage
   } = props;
 
-  console.log(visible);
+  const [ text, setText ] = useState('');
 
-  const [ text, setText ] = useState(test || '');
+  const isUpdated = useRef(true);
 
   if (isNewPage && text) setText('');
+
+  useEffect(() => {
+    if (isUpdated.current) {
+      isUpdated.current = false;
+      return;
+    }
+    if (!isNewPage && initialText && !isSubmitted) {
+      setText(initialText);
+    }
+  });
 
   const _onChange = e => {
     setText(e);
@@ -37,12 +48,13 @@ export default function InputText(props) {
 
   return (
     <StyledForm
+      ref={isUpdated}
       onSubmit={_submit}
       isSubmitted={isSubmitted}
       visible={visible} >
       <textarea
         onChange={e => _onChange(e.target.value)}
-        value={text} />
+        value={initialText || text} />
       <input
         type="submit"
         value=" " />

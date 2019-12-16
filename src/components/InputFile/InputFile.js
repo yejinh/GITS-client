@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledInputFile } from './InputFile.styled';
+import { StyledInput } from '../Input.styled';
 
 export default function InputFile({ setFiles }) {
   const _setFiles = files => {
@@ -11,13 +11,14 @@ export default function InputFile({ setFiles }) {
   };
 
   return (
-    <StyledInputFile>
+    <StyledInput>
       <input
         type="file"
         id="file"
         accept="image/jpeg, image/gif"
-        multiple onChange={e => _setFiles(e.target.files)} />
+        multiple
+        onChange={e => _setFiles(e.target.files)} />
       <label htmlFor="file">Select files</label>
-    </StyledInputFile>
+    </StyledInput>
   );
 }

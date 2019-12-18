@@ -3,7 +3,6 @@ import { StyledForm } from './InputText.styled';
 
 export default function InputText(props) {
   const {
-    testRef,
     initialText,
     visible,
     submit,
@@ -24,13 +23,14 @@ export default function InputText(props) {
       isUpdated.current = false;
       return;
     }
+
     if (!isNewPage && initialText && !isSubmitted) {
       setText(initialText);
     }
-  });
+  }, [ initialText, isNewPage, isSubmitted ]);
 
   const _onChange = e => {
-    setText(e);
+    setText(e.target.value);
     setIsSubmitted(false);
     setIsNewPage();
   };
@@ -53,8 +53,8 @@ export default function InputText(props) {
       isSubmitted={isSubmitted}
       visible={visible} >
       <textarea
-        onChange={e => _onChange(e.target.value)}
-        value={initialText || text} />
+        onChange={_onChange}
+        value={text || initialText} />
       <input
         type="submit"
         value=" " />

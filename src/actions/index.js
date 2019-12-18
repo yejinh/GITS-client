@@ -28,14 +28,33 @@ export const addPages = (textA, textB, contents, audioUrl) => ({
   }
 });
 
-export const prevPage = pageNumber => ({
-  type: actionTypes.PREV_PAGE,
-  pageNumber
-});
+export const prevPage = (pageNumber, textA, textB, contents, audioUrl) => {
+  if (textA) {
+    return {
+      type: actionTypes.PREV_PAGE,
+      pageNumber,
+      pageData: {
+        texts: [textA, textB],
+        contents: contents,
+        audioUrl: audioUrl
+      }
+    };
+  }
 
-export const nextPage = pageNumber => ({
+  return {
+    type: actionTypes.PREV_PAGE,
+    pageNumber
+  };
+};
+
+export const nextPage = (pageNumber, textA, textB, contents, audioUrl) => ({
   type: actionTypes.NEXT_PAGE,
-  pageNumber
+  pageNumber,
+  pageData: {
+    texts: [textA, textB],
+    contents: contents,
+    audioUrl: audioUrl
+  }
 });
 
 export const submitNewStory = newStory => ({

@@ -6,8 +6,8 @@ const dispatchAddPage = dispatch => (textA, textB, contents, audioUrl) => {
   dispatch(addPages(textA, textB, contents, audioUrl));
 };
 
-const dispatchPrevPage = dispatch => pageNumber => {
-  dispatch(prevPage(pageNumber));
+const dispatchPrevPage = dispatch => (pageNumber, textA, textB, contents, audioUrl) => {
+  dispatch(prevPage(pageNumber, textA, textB, contents, audioUrl));
 };
 
 const dispatchNextPage = dispatch => pageNumber => {

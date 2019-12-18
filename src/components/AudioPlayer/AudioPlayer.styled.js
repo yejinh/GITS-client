@@ -12,7 +12,7 @@ export const StyledAudioPlayer = sytled.div`
 
   .icon {
     display: flex;
-    width: 35px;
+    width: 45px;
     margin-right: 10px;
     justify-content: center;
     align-items: center;

@@ -5,6 +5,7 @@ import HomeContainer from '../../containers/HomeContainer';
 import LoginContainer from '../../containers/LoginContainer';
 import NewStoryContainer from '../../containers/NewStroyContainer';
 import NewStoryOptions from '../NewStoryOptions/NewStoryOptions';
+import NewStorySubmitContainer from '../../containers/NewStorySubmitContainer';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route path="/login" component={LoginContainer} />}
         <Route exact path="/new-story/options" component={PrivateRoute(NewStoryOptions)} />
         <Route exact path="/new-story" component={PrivateRoute(NewStoryContainer)} />
+        <Route exact path="/new-story/submit" component={PrivateRoute(NewStorySubmitContainer)} />
       </Switch>
     </Router>
   )

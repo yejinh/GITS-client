@@ -57,5 +57,14 @@ export const LoginButton = styled.button`
   font-family: ${vars.$serif};
   font-size: 12px;
   border-radius: 5px;
-  background-color: ${({ method }) => method === 'facebook' ? vars.$facebookLogin :  vars.$googleLogin}
+  background-color: ${({ method }) =>
+    method === 'facebook'
+      ? vars.$facebookLogin
+      :  vars.$googleLogin};
+
+  cursor: pointer;
+
+  :focus {
+    outline: none;
+  }
 `;

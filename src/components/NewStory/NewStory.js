@@ -20,7 +20,7 @@ function NewStory(props) {
     onPagesAdd,
     onPrevClick,
     onNextClick,
-    onNewStorySubmit
+    // onNewStorySubmit
   } = props;
   const { method } = location.state;
 
@@ -33,7 +33,6 @@ function NewStory(props) {
   const [ nextClicked, setNextClicked ] = useState(false);
 
   const isUpdated = useRef(true);
-  // const testRef = useRef(null);
 
   useEffect(() => {
     if (isUpdated.current) {
@@ -64,8 +63,16 @@ function NewStory(props) {
   const _onPrevClick = () => {
     if (curPageNumber) {
       _resetState();
+      setIsSubmittedA(true);
+      setIsSubmittedB(true);
       setNextClicked(false);
-      onPrevClick(curPageNumber - 1);
+
+      if (newStoryPages.length - 1 === curPageNumber) {
+        onPrevClick(curPageNumber - 1);
+        return;
+      }
+
+      onPrevClick(curPageNumber - 1, textA, textB, contents, audioUrl);
     }
   };
 
@@ -80,17 +87,24 @@ function NewStory(props) {
 
     if (newStoryPages.length - 1 >= curPageNumber) {
       _resetState();
+      setIsSubmittedA(true);
+      setIsSubmittedB(true);
       onNextClick(curPageNumber + 1);
 
       if (newStoryPages.length - 1 === curPageNumber) {
-        setNextClicked(true)
-      };
+        setNextClicked(true);
+        setIsSubmittedA(false);
+        setIsSubmittedB(false);
+      }
 
       return;
     }
 
+
     onPagesAdd(textA, textB, contents, audioUrl);
     _resetState();
+    setIsSubmittedA(false);
+    setIsSubmittedB(false);
     setNextClicked(true);
   };
 
@@ -99,8 +113,7 @@ function NewStory(props) {
       return alert('You must submit at least 3 pages');
     }
 
-    // onNewStorySubmit(title, cover,newStoryPages);
-    onNewStorySubmit(newStoryPages);
+    history.push("/new-story/submit");
   };
 
   const _resetState = () => {
@@ -108,8 +121,6 @@ function NewStory(props) {
     setTextB('');
     setContents([]);
     setAudioUrl(null);
-    setIsSubmittedA(false);
-    setIsSubmittedB(false);
   };
 
   return (
@@ -193,4 +204,5 @@ function NewStory(props) {
   );
 }
 
-export default React.memo(NewStory);
+// export default React.memo(NewStory);
+export default NewStory;

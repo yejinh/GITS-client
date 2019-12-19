@@ -24,10 +24,11 @@ export default function InputText(props) {
       return;
     }
 
-    if (!isNewPage && initialText && !isSubmitted) {
+    if (!isNewPage && initialText) {
       setText(initialText);
     }
-  }, [ initialText, isNewPage, isSubmitted ]);
+  }, [ initialText, isNewPage ]);
+
 
   const _onChange = e => {
     setText(e.target.value);
@@ -51,7 +52,7 @@ export default function InputText(props) {
       ref={isUpdated}
       onSubmit={_submit}
       isSubmitted={isSubmitted}
-      visible={visible} >
+      visible={visible}>
       <textarea
         onChange={_onChange}
         value={text || initialText} />

@@ -70,6 +70,7 @@ export const StyledNewStory = styled.div`
   }
 
   .pages-wrapper {
+    height: calc(100vh - 170px);
     justify-content: space-around;
 
     .pages {
@@ -91,6 +92,5 @@ export const StyledNewStory = styled.div`
 
   span {
     // border: 1px solid ${vars.$black};
-
   }
 `;

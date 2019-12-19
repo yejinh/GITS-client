@@ -19,17 +19,21 @@ const newStoryReducer = (state = initialState, action) => {
       };
 
     case PREV_PAGE:
+      action.pageData && state.pages.splice(action.pageNumber + 1, 1, action.pageData);
+
       return {
         ...state,
-        // pages: state.pages.splice(action.pageNumber + 1, 1, action.pageData),
+        pages: state.pages,
         curPage: state.pages[action.pageNumber],
         curPageNumber: action.pageNumber
       };
 
     case NEXT_PAGE:
+      state.pages.splice(action.pageNumber - 1, 1, action.pageData);
+
       return {
         ...state,
-        // pages: state.pages.splice(action.pageNumber - 1, 1, action.pageData),
+        pages: state.pages,
         curPage: state.pages[action.pageNumber],
         curPageNumber: action.pageNumber
       };

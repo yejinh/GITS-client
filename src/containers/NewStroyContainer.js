@@ -10,8 +10,8 @@ const dispatchPrevPage = dispatch => (pageNumber, textA, textB, contents, audioU
   dispatch(prevPage(pageNumber, textA, textB, contents, audioUrl));
 };
 
-const dispatchNextPage = dispatch => pageNumber => {
-  dispatch(nextPage(pageNumber));
+const dispatchNextPage = dispatch => (pageNumber, textA, textB, contents, audioUrl) => {
+  dispatch(nextPage(pageNumber, textA, textB, contents, audioUrl));
 };
 
 const dispatchSubmit = dispatch => newStory => {

@@ -33,6 +33,7 @@ function NewStory(props) {
   const [ nextClicked, setNextClicked ] = useState(false);
 
   const isUpdated = useRef(true);
+  const isThumbsnailsUpdated = useRef(true);
 
   useEffect(() => {
     if (isUpdated.current) {
@@ -67,10 +68,10 @@ function NewStory(props) {
       setIsSubmittedB(true);
       setNextClicked(false);
 
-      if (newStoryPages.length - 1 === curPageNumber) {
-        onPrevClick(curPageNumber - 1);
-        return;
-      }
+      // if (newStoryPages.length - 1 === curPageNumber) {
+      //   onPrevClick(curPageNumber - 1);
+      //   return;
+      // }
 
       onPrevClick(curPageNumber - 1, textA, textB, contents, audioUrl);
     }
@@ -89,7 +90,6 @@ function NewStory(props) {
       _resetState();
       setIsSubmittedA(true);
       setIsSubmittedB(true);
-      onNextClick(curPageNumber + 1);
 
       if (newStoryPages.length - 1 === curPageNumber) {
         setNextClicked(true);
@@ -97,6 +97,7 @@ function NewStory(props) {
         setIsSubmittedB(false);
       }
 
+      onNextClick(curPageNumber + 1, textA, textB, contents, audioUrl);
       return;
     }
 
@@ -108,10 +109,10 @@ function NewStory(props) {
     setNextClicked(true);
   };
 
-  const _onNewStorySubmit = (title, cover) => {
-    if (newStoryPages.length < 2) {
-      return alert('You must submit at least 3 pages');
-    }
+  const _onNewStorySubmit = () => {
+    // if (newStoryPages.length < 2) {
+    //   return alert('You must submit at least 3 pages');
+    // }
 
     history.push("/new-story/submit");
   };
@@ -126,13 +127,15 @@ function NewStory(props) {
   return (
     <StyledNewStory ref={isUpdated}>
       <section className="thumbnails-wrapper">
-        <div className="thumbnails">
+        <div
+          ref={isThumbsnailsUpdated}
+          className="thumbnails">
           <div>THUMBNAILS</div>
           {newStoryPages.map(page => (
             <NewStoryThumbnail
               key={page.texts}
               contents={page.contents} />
-        ))}
+          ))}
       </div>
       </section>
       <section className="story-wrapper">

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import * as vars from '../variables';
 
 export const StyledNewStoryThumbnail = styled.div`
   display: flex;

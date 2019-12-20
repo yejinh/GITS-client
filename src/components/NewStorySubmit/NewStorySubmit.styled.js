@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-// import * as vars from '../variables';
+import * as vars from '../variables';
 
 export const StyledNewStorySubmit = styled.div`
   height: 100vh;
@@ -21,12 +21,24 @@ export const StyledNewStorySubmit = styled.div`
     }
 
     > button {
-      display: inline-block;
+      display: inline-block;k
     }
   }
 
   .submit-story-wrapper {
     height: calc(100vh - 70px);
-    background-color: red;
+    flex-direction: column;
+    background-color: ${vars.$ivory};
+
+    input {
+      width: 100%;
+      height: 70px;
+      padding: 25px;
+      font-size: 25px;
+
+      :focus {
+        outline: none;
+      }
+    }
   }
 `;

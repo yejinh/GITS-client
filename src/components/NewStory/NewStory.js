@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Burger from '../Burger/Burger';
-import NewStoryThumbnail from '../NewStoryThumbnail/NewStoryThumbnail';
+import NewStoryThumbnails from '../NewStoryThumbnails/NewStoryThumbnails';
 import InputFile from '../InputFile/InputFile';
 import AudioPlayer from '../AudioPlayer/AudioPlayer';
 import NewStoryPage from '../NewStoryPage/NewStoryPage';
@@ -28,12 +28,9 @@ function NewStory(props) {
   const [ textB, setTextB ] = useState('');
   const [ contents, setContents ] = useState([]);
   const [ audioUrl, setAudioUrl ] = useState(null);
-  const [ isSubmittedA, setIsSubmittedA ] = useState(false);
-  const [ isSubmittedB, setIsSubmittedB ] = useState(false);
   const [ nextClicked, setNextClicked ] = useState(false);
 
   const isUpdated = useRef(true);
-  const isThumbsnailsUpdated = useRef(true);
 
   useEffect(() => {
     if (isUpdated.current) {
@@ -53,8 +50,6 @@ function NewStory(props) {
   const _setTextB = text => setTextB(text);
   const _setContents = content => setContents(content);
   const _setAudioUrl = audioFile => setAudioUrl(audioFile);
-  const _setIsSubmittedA = data => setIsSubmittedA(data);
-  const _setIsSubmittedB = data => setIsSubmittedB(data);
   const _setNextClicked = () => setNextClicked(false);
 
   const _handleExit = () => {
@@ -64,14 +59,7 @@ function NewStory(props) {
   const _onPrevClick = () => {
     if (curPageNumber) {
       _resetState();
-      setIsSubmittedA(true);
-      setIsSubmittedB(true);
       setNextClicked(false);
-
-      // if (newStoryPages.length - 1 === curPageNumber) {
-      //   onPrevClick(curPageNumber - 1);
-      //   return;
-      // }
 
       onPrevClick(curPageNumber - 1, textA, textB, contents, audioUrl);
     }
@@ -82,19 +70,11 @@ function NewStory(props) {
       return alert('You must upload contents on both pages.');
     }
 
-    if (!isSubmittedA || !isSubmittedB) {
-      return alert('You must save a story.');
-    }
-
     if (newStoryPages.length - 1 >= curPageNumber) {
       _resetState();
-      setIsSubmittedA(true);
-      setIsSubmittedB(true);
 
       if (newStoryPages.length - 1 === curPageNumber) {
         setNextClicked(true);
-        setIsSubmittedA(false);
-        setIsSubmittedB(false);
       }
 
       onNextClick(curPageNumber + 1, textA, textB, contents, audioUrl);
@@ -104,16 +84,10 @@ function NewStory(props) {
 
     onPagesAdd(textA, textB, contents, audioUrl);
     _resetState();
-    setIsSubmittedA(false);
-    setIsSubmittedB(false);
     setNextClicked(true);
   };
 
   const _onNewStorySubmit = () => {
-    // if (newStoryPages.length < 2) {
-    //   return alert('You must submit at least 3 pages');
-    // }
-
     history.push("/new-story/submit");
   };
 
@@ -127,16 +101,7 @@ function NewStory(props) {
   return (
     <StyledNewStory ref={isUpdated}>
       <section className="thumbnails-wrapper">
-        <div
-          ref={isThumbsnailsUpdated}
-          className="thumbnails">
-          <div>THUMBNAILS</div>
-          {newStoryPages.map(page => (
-            <NewStoryThumbnail
-              key={page.texts}
-              contents={page.contents} />
-          ))}
-      </div>
+      <NewStoryThumbnails newStoryPages={newStoryPages} />
       </section>
       <section className="story-wrapper">
         <section className="header-wrapper">
@@ -174,22 +139,18 @@ function NewStory(props) {
             <div>
               <NewStoryPage
                 method={method}
-                initialText={textA}
+                text={textA}
                 content={contents[0]}
-                submit={_setTextA}
-                isSubmitted={isSubmittedA}
-                setIsSubmitted={_setIsSubmittedA}
+                setText={_setTextA}
                 isNewPage={nextClicked}
                 setIsNewPage={_setNextClicked} />
             </div>
             <div>
               <NewStoryPage
                 method={method}
-                initialText={textB}
+                text={textB}
                 content={contents[1]}
-                submit={_setTextB}
-                isSubmitted={isSubmittedB}
-                setIsSubmitted={_setIsSubmittedB}
+                setText={_setTextB}
                 isNewPage={nextClicked}
                 setIsNewPage={_setNextClicked} />
             </div>
@@ -207,5 +168,4 @@ function NewStory(props) {
   );
 }
 
-// export default React.memo(NewStory);
 export default NewStory;

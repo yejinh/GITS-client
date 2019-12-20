@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Burger from '../Burger/Burger';
-import NewStoryThumbnail from '../NewStoryThumbnail/NewStoryThumbnail';
+import NewStoryThumbnails from '../NewStoryThumbnails/NewStoryThumbnails';
+import InputText from '../InputText/InputText';
 import { StyledNewStorySubmit } from './NewStorySubmit.styled';
 
 export default function NewStorySubmit({ history, newStoryPages }) {
@@ -18,18 +19,16 @@ export default function NewStorySubmit({ history, newStoryPages }) {
         </div>
       </section>
       <section className="submit-story-wrapper">
-        <input
-          type="text"
-          value={title}
-          onChange={e => setTitle(e.target.value)} />
-        <div className="thumbnails">
-          {newStoryPages.map(page => (
-            <NewStoryThumbnail
-              key={page.texts}
-              contents={page.contents} />
-        ))}
+        <div>
+          <InputText
+            type="text"
+            maxLength="30"
+            text={title}
+            setText={setTitle}
+          />
         </div>
+        <NewStoryThumbnails newStoryPages={newStoryPages} />
       </section>
     </StyledNewStorySubmit>
   );
-}
+};

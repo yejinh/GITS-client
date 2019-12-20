@@ -1,64 +1,35 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { StyledForm } from './InputText.styled';
 
 export default function InputText(props) {
   const {
-    initialText,
-    visible,
-    submit,
-    isSubmitted,
-    setIsSubmitted,
+    type,
+    text,
+    setText,
+    maxLength,
     isNewPage,
     setIsNewPage
   } = props;
 
-  const [ text, setText ] = useState('');
-
-  const isUpdated = useRef(true);
-
   if (isNewPage && text) setText('');
-
-  useEffect(() => {
-    if (isUpdated.current) {
-      isUpdated.current = false;
-      return;
-    }
-
-    if (!isNewPage && initialText) {
-      setText(initialText);
-    }
-  }, [ initialText, isNewPage ]);
-
 
   const _onChange = e => {
     setText(e.target.value);
-    setIsSubmitted(false);
-    setIsNewPage();
-  };
-
-  const _submit = e => {
-    e.preventDefault();
-
-    if (!text.length) {
-      return alert('You must type a story.');
-    }
-
-    submit(text);
-    setIsSubmitted(true);
+    setIsNewPage && setIsNewPage();
   };
 
   return (
-    <StyledForm
-      ref={isUpdated}
-      onSubmit={_submit}
-      isSubmitted={isSubmitted}
-      visible={visible}>
-      <textarea
-        onChange={_onChange}
-        value={text || initialText} />
-      <input
-        type="submit"
-        value=" " />
+    <StyledForm>
+      {type
+        ? <input
+            type={type}
+            maxLength={maxLength}
+            value={text}
+            onChange={_onChange} />
+        :  <textarea
+            onChange={_onChange}
+            value={text} />
+      }
     </StyledForm>
   );
 }

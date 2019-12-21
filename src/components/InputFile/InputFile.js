@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyledInput } from '../Input.styled';
 
-export default function InputFile({ setFiles }) {
+export default function InputFile({ multiple, setFiles }) {
   const _setFiles = files => {
-    if (files.length > 2) {
+    if (multiple && files.length > 2) {
       return alert("Please select max 2 files.");
     }
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as vars from '../variables';
+// import * as vars from '../variables';
 
 export const StyledNewStory = styled.div`
   display: flex;
@@ -14,6 +14,7 @@ export const StyledNewStory = styled.div`
   }
 
   .thumbnails-wrapper {
+    width: 400px;
     height: 100vh;
     padding: 10px;
   }
@@ -54,7 +55,7 @@ export const StyledNewStory = styled.div`
   }
 
   .pages-wrapper {
-    height: calc(100vh - 170px);
+    height: calc(100vh - 180px);
     justify-content: space-around;
 
     .pages {
@@ -72,9 +73,5 @@ export const StyledNewStory = styled.div`
       width: 5%;
       align-items: center;
     }
-  }
-
-  span {
-    // border: 1px solid ${vars.$black};
   }
 `;

@@ -5,7 +5,6 @@ import InputFile from '../InputFile/InputFile';
 import AudioPlayer from '../AudioPlayer/AudioPlayer';
 import NewStoryPage from '../NewStoryPage/NewStoryPage';
 import { StyledNewStory } from './NewStory.styled';
-import { StyledInput } from '../Input.styled';
 import Icon from '../Icon.Styled';
 import LEFT_BUTTON from './src/left-button.png';
 import RIGHT_BUTTON from './src/right-button.png';
@@ -20,7 +19,6 @@ function NewStory(props) {
     onPagesAdd,
     onPrevClick,
     onNextClick,
-    // onNewStorySubmit
   } = props;
   const { method } = location.state;
 
@@ -44,11 +42,11 @@ function NewStory(props) {
       setContents(curPage.contents);
       setAudioUrl(curPage.audioUrl);
     }
-  });
+  }, [ curPage, textA ]);
 
   const _setTextA = text => setTextA(text);
   const _setTextB = text => setTextB(text);
-  const _setContents = content => setContents(content);
+  const _setContents = contents => setContents(contents);
   const _setAudioUrl = audioFile => setAudioUrl(audioFile);
   const _setNextClicked = () => setNextClicked(false);
 
@@ -87,7 +85,11 @@ function NewStory(props) {
     setNextClicked(true);
   };
 
-  const _onNewStorySubmit = () => {
+  const _onSubmitClick = () => {
+    // if (newStoryPages.length < 3) {
+    //   return alert('You must submit at least 3 pages.');
+    // }
+
     history.push("/new-story/submit");
   };
 
@@ -101,7 +103,9 @@ function NewStory(props) {
   return (
     <StyledNewStory ref={isUpdated}>
       <section className="thumbnails-wrapper">
-      <NewStoryThumbnails newStoryPages={newStoryPages} />
+        <NewStoryThumbnails
+          width="100"
+          newStoryPages={newStoryPages} />
       </section>
       <section className="story-wrapper">
         <section className="header-wrapper">
@@ -111,19 +115,13 @@ function NewStory(props) {
         </section>
         <section className="buttons-wrapper">
           <div>
-            <InputFile setFiles={_setContents} />
+            <InputFile multiple={true} setFiles={_setContents} />
           </div>
           <AudioPlayer
             audioUrl={audioUrl}
             setAudioUrl={_setAudioUrl} />
           <div>
-            <StyledInput>
-              <input
-                type="submit"
-                id="submit"
-                onClick={_onNewStorySubmit} />
-              <label htmlFor="submit">Submit Story</label>
-            </StyledInput>
+            <div onClick={_onSubmitClick}>NEXT</div>
           </div>
         </section>
         <section className="pages-wrapper">

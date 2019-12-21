@@ -9,16 +9,18 @@ export default class NewStoryThumbnails extends Component {
 
   render() {
     return (
-      <StyledNewStoryThumbnails>
+      <StyledNewStoryThumbnails width={this.props.width}>
         <div>THUMBNAILS</div>
-        {this.props.newStoryPages.map(page => (
-          <div
-            key={page.texts}
-            className="thumbnail">
-            <DisplayImage content={page.contents[0]} />
-            <DisplayImage content={page.contents[1]} />
-          </div>
-        ))}
+        <div className="thumbnails">
+          {this.props.newStoryPages.map(page => (
+            <div
+              key={page.texts}
+              className="thumbnail">
+              <DisplayImage content={page.contents[0]} />
+              <DisplayImage content={page.contents[1]} />
+            </div>
+          ))}
+        </div>
       </StyledNewStoryThumbnails>
     );
   }

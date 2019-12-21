@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import NewStory from '../components/NewStory/NewStory';
-import { addPages, prevPage, nextPage, submitNewStory } from '../actions';
+import { addPages, prevPage, nextPage } from '../actions';
 
 const dispatchAddPage = dispatch => (textA, textB, contents, audioUrl) => {
   dispatch(addPages(textA, textB, contents, audioUrl));
@@ -14,11 +14,6 @@ const dispatchNextPage = dispatch => (pageNumber, textA, textB, contents, audioU
   dispatch(nextPage(pageNumber, textA, textB, contents, audioUrl));
 };
 
-const dispatchSubmit = dispatch => newStory => {
-  console.log(newStory);
-  dispatch(submitNewStory(newStory));
-};
-
 const mapStateToProps = state => ({
   user: state.userData.user,
   curPage: state.newStoryData.curPage,
@@ -29,8 +24,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onPagesAdd: dispatchAddPage(dispatch),
   onPrevClick: dispatchPrevPage(dispatch),
-  onNextClick: dispatchNextPage(dispatch),
-  onNewStorySubmit: dispatchSubmit(dispatch)
+  onNextClick: dispatchNextPage(dispatch)
 });
 
 export default connect(

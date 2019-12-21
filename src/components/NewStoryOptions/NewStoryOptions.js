@@ -9,7 +9,7 @@ import UPLOAD_ICON from './src/upload.png';
 import DRAW_ICON from './src/draw.png';
 
 export default function NewStoryOptions({ location }) {
-  const { user, isOpen } = location.state;
+  const { user } = location.state;
 
   // const [ isNavOpened, setIsNaveOpened ] = useState(isOpen);
   const [ isNavOpened, setIsNaveOpened ] = useState(false);

@@ -5,7 +5,7 @@ import Nav from '../Nav/Nav';
 import { StyledHome } from './Home.styled';
 
 export default function Home({ location, user, logout }) {
-  const { state } = location;
+  // const { state } = location;
   // const [ isNavOpened, setIsNaveOpened ] = useState((state && state.isOpen) || false);
   const [ isNavOpened, setIsNaveOpened ] = useState(false);
 

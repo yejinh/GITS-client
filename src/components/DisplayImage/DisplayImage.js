@@ -6,6 +6,7 @@ export default class DisplayImage extends Component {
   }
 
   render() {
+    console.log(this.props.content);
     return (
       <span
         className="image"

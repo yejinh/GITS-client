@@ -2,7 +2,8 @@ import {
   LOGIN,
   LOGOUT,
   IS_LOADING,
-  FETCH_USER_DATA
+  FETCH_USER_DATA,
+  FETCH_MY_STORIES
 } from '../constants/actionType';
 import { camelCaseConvertor } from '../utils';
 
@@ -11,6 +12,7 @@ const initialState = {
   isLoggedIn: token ? true : false,
   isLoading: true,
   user: {},
+  stories: []
 };
 
 const userReducer = (state = initialState, action) => {
@@ -26,6 +28,7 @@ const userReducer = (state = initialState, action) => {
 
     case LOGOUT:
       localStorage.removeItem('ACCESS_TOKEN');
+      localStorage.removeItem('USER_ID');
 
       return {
         ...state,
@@ -43,6 +46,12 @@ const userReducer = (state = initialState, action) => {
         ...state,
         user: camelCaseConvertor(action.userData),
         isLoggedIn: true
+      };
+
+    case FETCH_MY_STORIES:
+      return {
+        ...state,
+        stories: action.stories
       };
 
     default:

@@ -23,18 +23,13 @@ const dispatchFetchUserData = dispatch => async() => {
   }
 };
 
-const dispatchLogout = dispatch => () => {
-  dispatch(logout());
-};
-
 const mapStateToProps = state => ({
   isLoading: state.userData.isLoading,
   user: state.userData.user
 });
 
 const mapDispatchToProps = dispatch => ({
-  fatchUserData: dispatchFetchUserData(dispatch),
-  logout: dispatchLogout(dispatch)
+  fatchUserData: dispatchFetchUserData(dispatch)
 });
 
 export default connect(

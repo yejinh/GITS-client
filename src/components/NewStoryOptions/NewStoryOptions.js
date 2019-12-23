@@ -11,7 +11,6 @@ import DRAW_ICON from './src/draw.png';
 export default function NewStoryOptions({ location }) {
   const { user } = location.state;
 
-  // const [ isNavOpened, setIsNaveOpened ] = useState(isOpen);
   const [ isNavOpened, setIsNaveOpened ] = useState(false);
 
   const _handleNav = () => {
@@ -25,8 +24,8 @@ export default function NewStoryOptions({ location }) {
         isOpen={isNavOpened}
         onButtonClick={_handleNav} />
       <Nav
-        isOpen={isNavOpened}
-        user={user} />
+        user={user}
+        isOpen={isNavOpened} />
       <StyledNewStoryOptions>
         <section>
           <Link to={{

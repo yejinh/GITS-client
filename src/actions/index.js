@@ -20,6 +20,11 @@ export const fetchUserData = userData => ({
   userData
 });
 
+export const fetchMyStories = stories => ({
+  type: actionTypes.FETCH_MY_STORIES,
+  stories
+});
+
 export const addPages = (textA, textB, contents, audioUrl) => ({
   type: actionTypes.ADD_PAGES,
   pageData: {

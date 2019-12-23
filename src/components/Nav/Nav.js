@@ -1,10 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Icon from '../Icon.Styled';
 import LIKE from './src/like.png';
 import { StyledNav } from './Nav.styled';
+import { logout } from '../../actions';
 
-export default function Nav({ isOpen, user, logout }) {
+function Nav({ isOpen, user, logout }) {
   return (
     <StyledNav isOpen={isOpen}>
       <section>
@@ -25,21 +27,12 @@ export default function Nav({ isOpen, user, logout }) {
         <div>{user.email}</div>
       </section>
       <section>
-        <Link to={{
-          pathname: "/",
-          state: {
-            isOpen: isOpen
-          }}}>
+        <Link to="/">
           <span className="bar-left first" />
             Home
           <span className="bar-right first" />
         </Link>
-        <Link to={{
-          pathname: "/my-stories",
-          state: {
-            user: user,
-            isOpen: isOpen
-          }}}>
+        <Link to="/my-stories">
           <span className="bar-left second" />
             My Stories
           <span className="bar-right second" />
@@ -47,8 +40,7 @@ export default function Nav({ isOpen, user, logout }) {
         <Link to={{
           pathname: "/new-story/options",
           state: {
-            user: user,
-            isOpen: isOpen
+            user: user
           }}}>
           <span className="bar-left third" />
             New Story
@@ -65,3 +57,16 @@ export default function Nav({ isOpen, user, logout }) {
     </StyledNav>
   );
 }
+
+const mapStateToProps = state => ({
+  user: state.userData.user
+});
+
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logout())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Nav);

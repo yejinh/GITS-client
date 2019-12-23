@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import axios from 'axios';
 import MyStory from '../components/MyStory/MyStory';
+import { fetchMyStories } from '../actions';
 
 const dispatchFetchMyStories = dispatch => async() => {
   try {
@@ -13,7 +14,7 @@ const dispatchFetchMyStories = dispatch => async() => {
       Authorization: `Bearer ${token}`
     }});
 
-    console.log(res.data);
+    dispatch(fetchMyStories(res.data.stories));
   } catch(err) {
     console.log(err);
   }
@@ -21,6 +22,7 @@ const dispatchFetchMyStories = dispatch => async() => {
 
 const mapStateToProps = state => ({
   user: state.userData.user,
+  userStories: state.userData.stories
 });
 
 const mapDispatchToProps = dispatch => ({

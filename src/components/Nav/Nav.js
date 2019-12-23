@@ -35,7 +35,7 @@ export default function Nav({ isOpen, user, logout }) {
           <span className="bar-right first" />
         </Link>
         <Link to={{
-          pathname: "/new-story/options",
+          pathname: "/my-stories",
           state: {
             user: user,
             isOpen: isOpen

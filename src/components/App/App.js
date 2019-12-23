@@ -6,6 +6,7 @@ import LoginContainer from '../../containers/LoginContainer';
 import NewStoryContainer from '../../containers/NewStroyContainer';
 import NewStoryOptions from '../NewStoryOptions/NewStoryOptions';
 import NewStorySubmitContainer from '../../containers/NewStorySubmitContainer';
+import MyStoryContainer from '../../containers/MyStoryContainer';
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route exact path="/new-story/options" component={PrivateRoute(NewStoryOptions)} />
         <Route exact path="/new-story" component={PrivateRoute(NewStoryContainer)} />
         <Route exact path="/new-story/submit" component={PrivateRoute(NewStorySubmitContainer)} />
+        <Route exact path="/my-stories" component={PrivateRoute(MyStoryContainer)} />
       </Switch>
     </Router>
   )

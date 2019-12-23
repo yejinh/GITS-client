@@ -29,8 +29,8 @@ const dispatchAuthenticate = dispatch => async(method) => {
       }
     );
 
-    const { access_token } = res.data;
-    dispatch(login(access_token));
+    const { access_token, user_id } = res.data;
+    dispatch(login(access_token, user_id));
   } catch(err) {
     console.log(err);
   }

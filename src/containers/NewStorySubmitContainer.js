@@ -5,16 +5,23 @@ import NewStorySubmit from '../components/NewStorySubmit/NewStorySubmit';
 
 const dispatchSubmit = dispatch => async(userId, title, cover, pages) => {
   try {
-    console.log(cover.name);
+    console.log(pages);
     const data = new FormData();
     data.append('title', title);
     data.append('cover', cover);
-    data.append('pages', pages);
+    pages.forEach(page => {
+      data.append('audioUrls', page.audioUrl);
+      data.append('pages[]', page.contents[0]);
+      data.append('pages[]', page.contents[1]);
+      data.append('texts', page.texts[0]);
+      data.append('texts', page.texts[1]);
+    });
     data.append('date', new Date().toISOString());
 
     const token = localStorage.getItem('ACCESS_TOKEN');
 
-    const res = await axios.post(`${process.env.REACT_APP_HOST_URL}/api/users/${userId}/stories`, data, {
+    const res = await axios.post(`${process.env.REACT_APP_HOST_URL}/api/users/${userId}/stories`,
+      data, {
       headers: {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`

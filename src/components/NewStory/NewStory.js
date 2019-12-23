@@ -68,6 +68,10 @@ function NewStory(props) {
       return alert('You must upload contents on both pages.');
     }
 
+    if (!textA || !textB || !audioUrl) {
+      return alert('....');
+    }
+
     if (newStoryPages.length - 1 >= curPageNumber) {
       _resetState();
 

@@ -17,6 +17,7 @@ const userReducer = (state = initialState, action) => {
   switch(action.type) {
     case LOGIN:
         localStorage.setItem('ACCESS_TOKEN', action.token);
+        localStorage.setItem('USER_ID', action.userId);
 
       return {
         ...state,
